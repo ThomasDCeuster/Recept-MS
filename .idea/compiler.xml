@@ -8,9 +8,9 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="User-service" />
+        <module name="Recipe-service" />
         <module name="Rating-service" />
         <module name="Ingredient-service" />
-        <module name="Recept-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -21,8 +21,8 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Ingredient-service" options="-parameters" />
       <module name="Rating-service" options="-parameters" />
-      <module name="Recept-service" options="-parameters" />
       <module name="ReceptMS" options="" />
+      <module name="Recipe-service" options="-parameters" />
       <module name="User-service" options="-parameters" />
     </option>
   </component>
