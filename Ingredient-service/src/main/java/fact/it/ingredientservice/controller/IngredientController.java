@@ -26,8 +26,8 @@ public class IngredientController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<IngredientResponse> getAllIngredientsBySkuCode(@RequestParam List<String> skuCode) {
-        return ingredientService.getAllIngredientsBySkuCode(skuCode);
+    public List<IngredientResponse> getIngredientById(@RequestParam String id) {
+        return ingredientService.getIngredientById(id);
     }
 
     @GetMapping("/all")

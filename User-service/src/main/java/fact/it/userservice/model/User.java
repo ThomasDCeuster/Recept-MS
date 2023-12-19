@@ -13,7 +13,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 public class User {
     private String id;
-    private String skuCode;
     private String username;
 
 }

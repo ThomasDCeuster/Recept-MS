@@ -16,7 +16,6 @@ public class IngredientService {
 
     public void createIngredient(IngredientRequest ingredientRequest) {
         Ingredient ingredient = Ingredient.builder()
-                .skuCode(ingredientRequest.getSkuCode())
                 .name(ingredientRequest.getName())
                 .description(ingredientRequest.getDescription())
                 .measurementUnit(ingredientRequest.getMeasurementUnit())
@@ -27,15 +26,14 @@ public class IngredientService {
         ingredientRepository.save(ingredient);
     }
 
-    public List<IngredientResponse> getAllIngredientsBySkuCode(List<String> skuCode) {
-        List<Ingredient> ingredients = ingredientRepository.findBySkuCodeIn(skuCode);
+    public List<IngredientResponse> getIngredientById(String id) {
+        List<Ingredient> ingredients = ingredientRepository.findByIdIn(id);
 
         return ingredients.stream().map(this::mapToIngredientResponse).toList();
     }
 
     private IngredientResponse mapToIngredientResponse(Ingredient ingredient) {
         return IngredientResponse.builder()
-                .skuCode(ingredient.getSkuCode())
                 .name(ingredient.getName())
                 .description(ingredient.getDescription())
                 .measurementUnit(ingredient.getMeasurementUnit())

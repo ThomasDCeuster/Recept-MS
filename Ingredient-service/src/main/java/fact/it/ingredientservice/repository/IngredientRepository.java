@@ -6,5 +6,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.List;
 
 public interface IngredientRepository extends MongoRepository<Ingredient, String> {
-    List<Ingredient> findBySkuCodeIn(List<String> skuCode);
+    List<Ingredient> findByIdIn(String id);
 }

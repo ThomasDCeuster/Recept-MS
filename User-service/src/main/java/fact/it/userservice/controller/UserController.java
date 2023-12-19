@@ -17,7 +17,7 @@ public class UserController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
-    public void createIngredient(@RequestBody UserRequest userRequest) {
+    public void createUser(@RequestBody UserRequest userRequest) {
         {
             userService.createUser(userRequest);
         }
@@ -25,13 +25,13 @@ public class UserController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<UserResponse> getAllIngredientsBySkuCode(@RequestParam List<String> skuCode) {
-        return userService.getAllUsersBySkuCode(skuCode);
+    public List<UserResponse> getUserById(@RequestParam String id) {
+        return userService.getUserById(id);
     }
 
     @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
-    public List<UserResponse> getAllIngredients() {
+    public List<UserResponse> getAllUsers() {
         return userService.getAllUsers();
     }
 }

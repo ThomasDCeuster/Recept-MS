@@ -13,7 +13,6 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class IngredientResponse {
     private String id;
-    private String skuCode;
     private String name;
     private String description;
     private String measurementUnit;

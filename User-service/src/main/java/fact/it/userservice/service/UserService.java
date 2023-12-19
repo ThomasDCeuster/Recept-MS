@@ -16,22 +16,20 @@ public class UserService {
 
     public void createUser(UserRequest userRequest) {
         User user = User.builder()
-                .skuCode(userRequest.getSkuCode())
                 .username(userRequest.getUsername())
                 .build();
 
         userRepository.save(user);
     }
 
-    public List<UserResponse> getAllUsersBySkuCode(List<String> skuCode) {
-        List<User> users = userRepository.findBySkuCodeIn(skuCode);
+    public List<UserResponse> getUserById(String id) {
+        List<User> users = userRepository.findByIdIn(id);
 
         return users.stream().map(this::mapToUserResponse).toList();
     }
 
     private UserResponse mapToUserResponse(User user) {
         return UserResponse.builder()
-                .skuCode(user.getSkuCode())
                 .username(user.getUsername())
                 .build();
     }
