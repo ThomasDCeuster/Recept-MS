@@ -30,6 +30,16 @@ jobs:
       - name: Upload container to Docker Hub with Push
         run: docker push ${{ secrets.DOCKER_USER }}/recipe-service:latest
 
+      - uses: okteto/context@latest
+        with:
+          url: https://okteto.example.com
+          token: ${{ secrets.OKTETO_TOKEN }}
+    
+      - name: "Create development environments namespace"
+        uses: okteto/namespace@latest
+        with:
+          namespace: ede-thomasdceuster
+
       - name: Build
         uses: okteto/actions/build@v1
         with:
@@ -85,6 +95,16 @@ jobs:
 
       - name: Upload container to Docker Hub with Push
         run: docker push ${{ secrets.DOCKER_USER }}/ingredient-service:latest
+
+      - uses: okteto/context@latest
+        with:
+          url: https://okteto.example.com
+          token: ${{ secrets.OKTETO_TOKEN }}
+    
+      - name: "Create development environments namespace"
+        uses: okteto/namespace@latest
+        with:
+          namespace: ede-thomasdceuster
 
       - name: Build
         uses: okteto/actions/build@v1
@@ -142,6 +162,16 @@ jobs:
       - name: Upload container to Docker Hub with Push
         run: docker push ${{ secrets.DOCKER_USER }}/user-service:latest
 
+      - uses: okteto/context@latest
+        with:
+          url: https://okteto.example.com
+          token: ${{ secrets.OKTETO_TOKEN }}
+    
+      - name: "Create development environments namespace"
+        uses: okteto/namespace@latest
+        with:
+          namespace: ede-thomasdceuster
+
       - name: Build
         uses: okteto/actions/build@v1
         with:
@@ -198,6 +228,16 @@ jobs:
       - name: Upload container to Docker Hub with Push
         run: docker push ${{ secrets.DOCKER_USER }}/rating-service:latest
 
+      - uses: okteto/context@latest
+        with:
+          url: https://okteto.example.com
+          token: ${{ secrets.OKTETO_TOKEN }}
+    
+      - name: "Create development environments namespace"
+        uses: okteto/namespace@latest
+        with:
+          namespace: ede-thomasdceuster
+
       - name: Build
         uses: okteto/actions/build@v1
         with:
@@ -253,6 +293,16 @@ jobs:
   
         - name: Upload container to Docker Hub with Push
           run: docker push ${{ secrets.DOCKER_USER }}/api-gateway:latest
+
+        - uses: okteto/context@latest
+        with:
+          url: https://okteto.example.com
+          token: ${{ secrets.OKTETO_TOKEN }}
+    
+      - name: "Create development environments namespace"
+        uses: okteto/namespace@latest
+        with:
+          namespace: ede-thomasdceuster
 
         - name: Build
           uses: okteto/actions/build@v1
