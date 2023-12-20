@@ -18,7 +18,7 @@ jobs:
           distribution: adopt
       
       - name: Build, test and package project
-        working-directory: recipe-service
+        working-directory: ./Recipe-service
         run: mvn package -DskipTests
 
       - name: Docker login
@@ -44,7 +44,7 @@ jobs:
           distribution: adopt
 
       - name: Build, test and package project
-        working-directory: ingredient-service
+        working-directory: ./Ingredient-service
         run: mvn package -DskipTests
 
       - name: Docker login
@@ -70,7 +70,7 @@ jobs:
           distribution: adopt
         
       - name: Build, test and package project
-        working-directory: user-service
+        working-directory: ./User-service
         run: mvn package -DskipTests
         
       - name: Docker login
@@ -96,7 +96,7 @@ jobs:
           distribution: adopt
 
       - name: Build, test and package project
-        working-directory: rating-service
+        working-directory: ./Rating-service
         run: mvn package -DskipTests
 
       - name: Docker login
@@ -122,7 +122,7 @@ jobs:
             distribution: adopt
   
         - name: Build, test and package project
-          working-directory: api-gateway
+          working-directory: ./Api-gateway
           run: mvn package -DskipTests
   
         - name: Docker login
