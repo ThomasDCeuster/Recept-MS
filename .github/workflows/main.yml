@@ -30,7 +30,8 @@ jobs:
       - name: Upload container to Docker Hub with Push
         run: docker push ${{ secrets.DOCKER_USER }}/recipe-service:latest
 
-      - uses: okteto/context@latest
+      - name: Namespace
+        uses: okteto/context@latest
         with:
           url: https://okteto.example.com
           token: ${{ secrets.OKTETO_TOKEN }}
@@ -96,7 +97,8 @@ jobs:
       - name: Upload container to Docker Hub with Push
         run: docker push ${{ secrets.DOCKER_USER }}/ingredient-service:latest
 
-      - uses: okteto/context@latest
+      - name: Namespace
+        uses: okteto/context@latest
         with:
           url: https://okteto.example.com
           token: ${{ secrets.OKTETO_TOKEN }}
@@ -162,7 +164,8 @@ jobs:
       - name: Upload container to Docker Hub with Push
         run: docker push ${{ secrets.DOCKER_USER }}/user-service:latest
 
-      - uses: okteto/context@latest
+      - name: Namespace
+        uses: okteto/context@latest
         with:
           url: https://okteto.example.com
           token: ${{ secrets.OKTETO_TOKEN }}
@@ -228,7 +231,8 @@ jobs:
       - name: Upload container to Docker Hub with Push
         run: docker push ${{ secrets.DOCKER_USER }}/rating-service:latest
 
-      - uses: okteto/context@latest
+      - name: Namespace
+        uses: okteto/context@latest
         with:
           url: https://okteto.example.com
           token: ${{ secrets.OKTETO_TOKEN }}
@@ -271,65 +275,66 @@ jobs:
       runs-on: ubuntu-latest
       name: Java 17 build, test, deliver api-gateway container
       steps:
-        - name: Check out repository
-          uses: actions/checkout@v3
-  
-        - name: Set up JDK 17
-          uses: actions/setup-java@v3
-          with:
-            java-version: 17
-            cache: maven
-            distribution: adopt
-  
-        - name: Build, test and package project
-          working-directory: ./api-gateway
-          run: mvn package -DskipTests
-  
-        - name: Docker login
-          run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USER }} --password-stdin
-  
-        - name: Docker Build
-          run: docker build -t ${{ secrets.DOCKER_USER }}/api-gateway:latest ./api-gateway
-  
-        - name: Upload container to Docker Hub with Push
-          run: docker push ${{ secrets.DOCKER_USER }}/api-gateway:latest
+      - name: Check out repository
+        uses: actions/checkout@v3
 
-        - uses: okteto/context@latest
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          cache: maven
+          distribution: adopt
+
+      - name: Build, test and package project
+        working-directory: ./api-gateway
+        run: mvn package -DskipTests
+
+      - name: Docker login
+        run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USER }} --password-stdin
+
+      - name: Docker Build
+        run: docker build -t ${{ secrets.DOCKER_USER }}/api-gateway:latest ./api-gateway
+
+      - name: Upload container to Docker Hub with Push
+        run: docker push ${{ secrets.DOCKER_USER }}/api-gateway:latest
+
+      - name: Namespace
+        uses: okteto/context@latest
         with:
           url: https://okteto.example.com
           token: ${{ secrets.OKTETO_TOKEN }}
-    
+  
       - name: "Create development environments namespace"
         uses: okteto/namespace@latest
         with:
           namespace: ede-thomasdceuster
 
-        - name: Build
-          uses: okteto/actions/build@v1
-          with:
-            token: ${{ secrets.OKTETO_TOKEN }}
-            tag: ${{ secrets.DOCKER_USERNAME }}/api-gateway:${{ github.sha }}
-            namespace: ede-thomasdceuster
+      - name: Build
+        uses: okteto/actions/build@v1
+        with:
+          token: ${{ secrets.OKTETO_TOKEN }}
+          tag: ${{ secrets.DOCKER_USERNAME }}/api-gateway:${{ github.sha }}
+          namespace: ede-thomasdceuster
 
-        - name: Get Kubeconfig
-          uses: okteto/actions/namespace@v1
-          id: namespace
-          with:
-            token: ${{ secrets.OKTETO_TOKEN }}
-            namespace: ede-thomasdceuster
-          
-        - name: Deploy and Wait
-          uses: okteto/actions/deploy@v1
-          env:
-            KUBECONFIG: ${{ steps.namespace.outputs.kubeconfig }}
-          with:
-            namespace: ede-thomasdceuster
-            manifest: k8s.yml
-            tag: ${{ secrets.DOCKER_USERNAME }}/api-gateway:${{ github.sha }}
-            waitOn: deployment/api-gateway
-  
-        - name: Verify
-          uses: srt32/uptime@master
-          with:
-            url-to-hit: "https://api-gateway-ede-thomasdceuster.cloud.okteto.net"
-            expected-statuses: "200"
+      - name: Get Kubeconfig
+        uses: okteto/actions/namespace@v1
+        id: namespace
+        with:
+          token: ${{ secrets.OKTETO_TOKEN }}
+          namespace: ede-thomasdceuster
+        
+      - name: Deploy and Wait
+        uses: okteto/actions/deploy@v1
+        env:
+          KUBECONFIG: ${{ steps.namespace.outputs.kubeconfig }}
+        with:
+          namespace: ede-thomasdceuster
+          manifest: k8s.yml
+          tag: ${{ secrets.DOCKER_USERNAME }}/api-gateway:${{ github.sha }}
+          waitOn: deployment/api-gateway
+
+      - name: Verify
+        uses: srt32/uptime@master
+        with:
+          url-to-hit: "https://api-gateway-ede-thomasdceuster.cloud.okteto.net"
+          expected-statuses: "200"
