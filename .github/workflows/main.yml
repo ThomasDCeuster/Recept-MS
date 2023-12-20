@@ -35,6 +35,29 @@ jobs:
         with:
           token: ${{ secrets.OKTETO_TOKEN }}
           tag: ${{ secrets.DOCKER_USERNAME }}/recipe-service:${{ github.sha }}
+
+      - name: Get Kubeconfig
+        uses: okteto/actions/namespace@v1
+        id: namespace
+        with:
+          token: ${{ secrets.OKTETO_TOKEN }}
+          namespace: ede-thomasdceuster
+          
+      - name: Deploy and Wait
+        uses: okteto/actions/deploy@v1
+        env:
+          KUBECONFIG: ${{ steps.namespace.outputs.kubeconfig }}
+        with:
+          namespace: ede-thomasdceuster
+          manifest: k8s.yml
+          tag: ${{ secrets.DOCKER_USERNAME }}/recipe-service:${{ github.sha }}
+          waitOn: deployment/recipe-service
+
+      - name: Verify
+        uses: srt32/uptime@master
+        with:
+          url-to-hit: "https://recipe-service-ede-thomasdceuster.cloud.okteto.net"
+          expected-statuses: "200"
   ingredientservice:
     runs-on: ubuntu-latest
     name: Java 17 build, test, deliver ingredient-service container
@@ -67,6 +90,29 @@ jobs:
         with:
           token: ${{ secrets.OKTETO_TOKEN }}
           tag: ${{ secrets.DOCKER_USERNAME }}/ingredient-service:${{ github.sha }}
+
+      - name: Get Kubeconfig
+        uses: okteto/actions/namespace@v1
+        id: namespace
+        with:
+          token: ${{ secrets.OKTETO_TOKEN }}
+          namespace: ede-thomasdceuster
+          
+      - name: Deploy and Wait
+        uses: okteto/actions/deploy@v1
+        env:
+          KUBECONFIG: ${{ steps.namespace.outputs.kubeconfig }}
+        with:
+          namespace: ede-thomasdceuster
+          manifest: k8s.yml
+          tag: ${{ secrets.DOCKER_USERNAME }}/ingredient-service:${{ github.sha }}
+          waitOn: deployment/ingredient-service
+
+      - name: Verify
+        uses: srt32/uptime@master
+        with:
+          url-to-hit: "https://ingredient-service-ede-thomasdceuster.cloud.okteto.net"
+          expected-statuses: "200"
   userservice:
     runs-on: ubuntu-latest
     name: Java 17 build, test, deliver user-service container
@@ -99,6 +145,29 @@ jobs:
         with:
           token: ${{ secrets.OKTETO_TOKEN }}
           tag: ${{ secrets.DOCKER_USERNAME }}/user-service:${{ github.sha }}
+
+      - name: Get Kubeconfig
+        uses: okteto/actions/namespace@v1
+        id: namespace
+        with:
+          token: ${{ secrets.OKTETO_TOKEN }}
+          namespace: ede-thomasdceuster
+          
+      - name: Deploy and Wait
+        uses: okteto/actions/deploy@v1
+        env:
+          KUBECONFIG: ${{ steps.namespace.outputs.kubeconfig }}
+        with:
+          namespace: ede-thomasdceuster
+          manifest: k8s.yml
+          tag: ${{ secrets.DOCKER_USERNAME }}/user-service:${{ github.sha }}
+          waitOn: deployment/user-service
+
+      - name: Verify
+        uses: srt32/uptime@master
+        with:
+          url-to-hit: "https://user-service-ede-thomasdceuster.cloud.okteto.net"
+          expected-statuses: "200"
   ratingservice:
     runs-on: ubuntu-latest
     name: Java 17 build, test, deliver rating-service container
@@ -131,6 +200,29 @@ jobs:
         with:
           token: ${{ secrets.OKTETO_TOKEN }}
           tag: ${{ secrets.DOCKER_USERNAME }}/rating-service:${{ github.sha }}
+
+      - name: Get Kubeconfig
+        uses: okteto/actions/namespace@v1
+        id: namespace
+        with:
+          token: ${{ secrets.OKTETO_TOKEN }}
+          namespace: ede-thomasdceuster
+          
+      - name: Deploy and Wait
+        uses: okteto/actions/deploy@v1
+        env:
+          KUBECONFIG: ${{ steps.namespace.outputs.kubeconfig }}
+        with:
+          namespace: ede-thomasdceuster
+          manifest: k8s.yml
+          tag: ${{ secrets.DOCKER_USERNAME }}/rating-service:${{ github.sha }}
+          waitOn: deployment/rating-service
+
+      - name: Verify
+        uses: srt32/uptime@master
+        with:
+          url-to-hit: "https://rating-service-ede-thomasdceuster.cloud.okteto.net"
+          expected-statuses: "200"
   apigateway:
       runs-on: ubuntu-latest
       name: Java 17 build, test, deliver api-gateway container
@@ -163,3 +255,26 @@ jobs:
           with:
             token: ${{ secrets.OKTETO_TOKEN }}
             tag: ${{ secrets.DOCKER_USERNAME }}/api-gateway:${{ github.sha }}
+
+        - name: Get Kubeconfig
+          uses: okteto/actions/namespace@v1
+          id: namespace
+          with:
+            token: ${{ secrets.OKTETO_TOKEN }}
+            namespace: ede-thomasdceuster
+          
+        - name: Deploy and Wait
+          uses: okteto/actions/deploy@v1
+          env:
+            KUBECONFIG: ${{ steps.namespace.outputs.kubeconfig }}
+          with:
+            namespace: ede-thomasdceuster
+            manifest: k8s.yml
+            tag: ${{ secrets.DOCKER_USERNAME }}/api-gateway:${{ github.sha }}
+            waitOn: deployment/api-gateway
+  
+        - name: Verify
+          uses: srt32/uptime@master
+          with:
+            url-to-hit: "https://api-gateway-ede-thomasdceuster.cloud.okteto.net"
+            expected-statuses: "200"
