@@ -29,6 +29,12 @@ jobs:
 
       - name: Upload container to Docker Hub with Push
         run: docker push ${{ secrets.DOCKER_USER }}/recipe-service:latest
+
+      - name: Build
+        uses: okteto/actions/build@v1
+        with:
+          token: ${{ secrets.OKTETO_TOKEN }}
+          tag: ${{ secrets.DOCKER_USERNAME }}/recipe-service:${{ github.sha }}
   ingredientservice:
     runs-on: ubuntu-latest
     name: Java 17 build, test, deliver ingredient-service container
@@ -55,6 +61,12 @@ jobs:
 
       - name: Upload container to Docker Hub with Push
         run: docker push ${{ secrets.DOCKER_USER }}/ingredient-service:latest
+
+      - name: Build
+        uses: okteto/actions/build@v1
+        with:
+          token: ${{ secrets.OKTETO_TOKEN }}
+          tag: ${{ secrets.DOCKER_USERNAME }}/ingredient-service:${{ github.sha }}
   userservice:
     runs-on: ubuntu-latest
     name: Java 17 build, test, deliver user-service container
@@ -81,6 +93,12 @@ jobs:
 
       - name: Upload container to Docker Hub with Push
         run: docker push ${{ secrets.DOCKER_USER }}/user-service:latest
+
+      - name: Build
+        uses: okteto/actions/build@v1
+        with:
+          token: ${{ secrets.OKTETO_TOKEN }}
+          tag: ${{ secrets.DOCKER_USERNAME }}/user-service:${{ github.sha }}
   ratingservice:
     runs-on: ubuntu-latest
     name: Java 17 build, test, deliver rating-service container
@@ -107,6 +125,12 @@ jobs:
 
       - name: Upload container to Docker Hub with Push
         run: docker push ${{ secrets.DOCKER_USER }}/rating-service:latest
+
+      - name: Build
+        uses: okteto/actions/build@v1
+        with:
+          token: ${{ secrets.OKTETO_TOKEN }}
+          tag: ${{ secrets.DOCKER_USERNAME }}/rating-service:${{ github.sha }}
   apigateway:
       runs-on: ubuntu-latest
       name: Java 17 build, test, deliver api-gateway container
@@ -133,3 +157,9 @@ jobs:
   
         - name: Upload container to Docker Hub with Push
           run: docker push ${{ secrets.DOCKER_USER }}/api-gateway:latest
+
+        - name: Build
+          uses: okteto/actions/build@v1
+          with:
+            token: ${{ secrets.OKTETO_TOKEN }}
+            tag: ${{ secrets.DOCKER_USERNAME }}/api-gateway:${{ github.sha }}
