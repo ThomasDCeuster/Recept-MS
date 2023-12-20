@@ -1,7 +1,4 @@
 package fact.it.ratingservice.service;
-
-import fact.it.inventoryservice.dto.InventoryResponse;
-import fact.it.inventoryservice.model.StockItem;
 import fact.it.ratingservice.repository.RatingRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
