@@ -35,6 +35,7 @@ jobs:
         with:
           token: ${{ secrets.OKTETO_TOKEN }}
           tag: ${{ secrets.DOCKER_USERNAME }}/recipe-service:${{ github.sha }}
+          namespace: ede-thomasdceuster
 
       - name: Get Kubeconfig
         uses: okteto/actions/namespace@v1
@@ -90,6 +91,7 @@ jobs:
         with:
           token: ${{ secrets.OKTETO_TOKEN }}
           tag: ${{ secrets.DOCKER_USERNAME }}/ingredient-service:${{ github.sha }}
+          namespace: ede-thomasdceuster
 
       - name: Get Kubeconfig
         uses: okteto/actions/namespace@v1
@@ -145,6 +147,7 @@ jobs:
         with:
           token: ${{ secrets.OKTETO_TOKEN }}
           tag: ${{ secrets.DOCKER_USERNAME }}/user-service:${{ github.sha }}
+          namespace: ede-thomasdceuster
 
       - name: Get Kubeconfig
         uses: okteto/actions/namespace@v1
@@ -200,6 +203,7 @@ jobs:
         with:
           token: ${{ secrets.OKTETO_TOKEN }}
           tag: ${{ secrets.DOCKER_USERNAME }}/rating-service:${{ github.sha }}
+          namespace: ede-thomasdceuster
 
       - name: Get Kubeconfig
         uses: okteto/actions/namespace@v1
@@ -255,6 +259,7 @@ jobs:
           with:
             token: ${{ secrets.OKTETO_TOKEN }}
             tag: ${{ secrets.DOCKER_USERNAME }}/api-gateway:${{ github.sha }}
+            namespace: ede-thomasdceuster
 
         - name: Get Kubeconfig
           uses: okteto/actions/namespace@v1
