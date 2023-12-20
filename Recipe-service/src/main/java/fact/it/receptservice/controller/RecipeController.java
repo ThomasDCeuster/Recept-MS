@@ -1,6 +1,5 @@
 package fact.it.receptservice.controller;
 
-import fact.it.orderservice.dto.OrderResponse;
 import fact.it.receptservice.service.RecipeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
