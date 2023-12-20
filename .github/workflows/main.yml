@@ -30,7 +30,7 @@ jobs:
       - name: Upload container to Docker Hub with Push
         run: docker push ${{ secrets.DOCKER_USER }}/recipe-service:latest
     
-      - name: "Create development environments namespace"
+      - name: Create development environments namespace
         uses: okteto/namespace@latest
         with:
           namespace: ede-thomasdceuster
