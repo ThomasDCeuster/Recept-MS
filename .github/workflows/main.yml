@@ -25,10 +25,10 @@ jobs:
         run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USER }} --password-stdin
 
       - name: Docker Build
-        run: docker build -t ${{ secrets.DOCKER_USER }}/recipe-service:latest ./recipe-service
+        run: docker build -t ${{ secrets.DOCKER_USER }}/Recipe-service:latest ./Recipe-service
 
       - name: Upload container to Docker Hub with Push
-        run: docker push ${{ secrets.DOCKER_USER }}/recipe-service:latest
+        run: docker push ${{ secrets.DOCKER_USER }}/Recipe-service:latest
   ingredientservice:
     runs-on: ubuntu-latest
     name: Java 17 build, test, deliver ingredient-service container
@@ -51,10 +51,10 @@ jobs:
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Docker Build
-        run: docker build -t ${{ secrets.DOCKER_USER }}/ingredient-service:latest ./ingredient-service
+        run: docker build -t ${{ secrets.DOCKER_USER }}/Ingredient-service:latest ./Ingredient-service
 
       - name: Upload container to Docker Hub with Push
-        run: docker push ${{ secrets.DOCKER_USER }}/ingredient-service:latest
+        run: docker push ${{ secrets.DOCKER_USER }}/Ingredient-service:latest
   userservice:
     runs-on: ubuntu-latest
     name: Java 17 build, test, deliver user-service container
@@ -77,10 +77,10 @@ jobs:
         run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USER }} --password-stdin
 
       - name: Docker Build
-        run: docker build -t ${{ secrets.DOCKER_USER }}/user-service:latest ./user-service
+        run: docker build -t ${{ secrets.DOCKER_USER }}/User-service:latest ./User-service
 
       - name: Upload container to Docker Hub with Push
-        run: docker push ${{ secrets.DOCKER_USER }}/user-service:latest
+        run: docker push ${{ secrets.DOCKER_USER }}/User-service:latest
   ratingservice:
     runs-on: ubuntu-latest
     name: Java 17 build, test, deliver rating-service container
@@ -103,10 +103,10 @@ jobs:
         run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USER }} --password-stdin
 
       - name: Docker Build
-        run: docker build -t ${{ secrets.DOCKER_USER }}/rating-service:latest ./rating-service
+        run: docker build -t ${{ secrets.DOCKER_USER }}/Rating-service:latest ./Rating-service
 
       - name: Upload container to Docker Hub with Push
-        run: docker push ${{ secrets.DOCKER_USER }}/rating-service:latest
+        run: docker push ${{ secrets.DOCKER_USER }}/Rating-service:latest
   apigateway:
       runs-on: ubuntu-latest
       name: Java 17 build, test, deliver api-gateway container
@@ -122,7 +122,7 @@ jobs:
             distribution: adopt
   
         - name: Build, test and package project
-          working-directory: ./Api-gateway
+          working-directory: ./api-gateway
           run: mvn package -DskipTests
   
         - name: Docker login
