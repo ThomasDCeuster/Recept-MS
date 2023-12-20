@@ -29,12 +29,6 @@ jobs:
 
       - name: Upload container to Docker Hub with Push
         run: docker push ${{ secrets.DOCKER_USER }}/recipe-service:latest
-
-      - name: Namespace
-        uses: okteto/context@latest
-        with:
-          url: https://okteto.example.com
-          token: ${{ secrets.OKTETO_TOKEN }}
     
       - name: "Create development environments namespace"
         uses: okteto/namespace@latest
@@ -96,12 +90,6 @@ jobs:
 
       - name: Upload container to Docker Hub with Push
         run: docker push ${{ secrets.DOCKER_USER }}/ingredient-service:latest
-
-      - name: Namespace
-        uses: okteto/context@latest
-        with:
-          url: https://okteto.example.com
-          token: ${{ secrets.OKTETO_TOKEN }}
     
       - name: "Create development environments namespace"
         uses: okteto/namespace@latest
@@ -163,12 +151,6 @@ jobs:
 
       - name: Upload container to Docker Hub with Push
         run: docker push ${{ secrets.DOCKER_USER }}/user-service:latest
-
-      - name: Namespace
-        uses: okteto/context@latest
-        with:
-          url: https://okteto.example.com
-          token: ${{ secrets.OKTETO_TOKEN }}
     
       - name: "Create development environments namespace"
         uses: okteto/namespace@latest
@@ -230,12 +212,6 @@ jobs:
 
       - name: Upload container to Docker Hub with Push
         run: docker push ${{ secrets.DOCKER_USER }}/rating-service:latest
-
-      - name: Namespace
-        uses: okteto/context@latest
-        with:
-          url: https://okteto.example.com
-          token: ${{ secrets.OKTETO_TOKEN }}
     
       - name: "Create development environments namespace"
         uses: okteto/namespace@latest
@@ -297,12 +273,6 @@ jobs:
 
       - name: Upload container to Docker Hub with Push
         run: docker push ${{ secrets.DOCKER_USER }}/api-gateway:latest
-
-      - name: Namespace
-        uses: okteto/context@latest
-        with:
-          url: https://okteto.example.com
-          token: ${{ secrets.OKTETO_TOKEN }}
   
       - name: "Create development environments namespace"
         uses: okteto/namespace@latest
