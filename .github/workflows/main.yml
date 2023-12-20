@@ -22,7 +22,7 @@ jobs:
         run: mvn package -DskipTests
 
       - name: Docker login
-        run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
+        run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USER }} --password-stdin
 
       - name: Docker Build
         run: docker build -t ${{ secrets.DOCKER_USER }}/recipe-service:latest ./recipe-service
@@ -74,7 +74,7 @@ jobs:
         run: mvn package -DskipTests
         
       - name: Docker login
-        run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
+        run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USER }} --password-stdin
 
       - name: Docker Build
         run: docker build -t ${{ secrets.DOCKER_USER }}/user-service:latest ./user-service
@@ -100,7 +100,7 @@ jobs:
         run: mvn package -DskipTests
 
       - name: Docker login
-        run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
+        run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USER }} --password-stdin
 
       - name: Docker Build
         run: docker build -t ${{ secrets.DOCKER_USER }}/rating-service:latest ./rating-service
@@ -126,7 +126,7 @@ jobs:
           run: mvn package -DskipTests
   
         - name: Docker login
-          run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
+          run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USER }} --password-stdin
   
         - name: Docker Build
           run: docker build -t ${{ secrets.DOCKER_USER }}/api-gateway:latest ./api-gateway
