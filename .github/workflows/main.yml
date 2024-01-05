@@ -30,14 +30,6 @@ jobs:
       - name: Upload container to Docker Hub with Push
         run: docker push ${{ secrets.DOCKER_USER }}/recipe-service:latest
 
-      - name: Deploy to Okteto
-        uses: okteto/deploy-action@v1
-        with:
-          token: ${{ secrets.OKTETO_TOKEN }}
-          manifest: ./Recipe-service/okteto.yml
-          image: ${{ secrets.DOCKER_USER }}/recipe-service:latest
-          namespace: ${{ secrets.OKTETO_NAMESPACE }}
-
   ingredientservice:
     runs-on: ubuntu-latest
     name: Java 17 build, test, deliver ingredient-service container
@@ -64,15 +56,7 @@ jobs:
 
       - name: Upload container to Docker Hub with Push
         run: docker push ${{ secrets.DOCKER_USER }}/ingredient-service:latest
-
-      - name: Deploy to Okteto
-        uses: okteto/deploy-action@v1
-        with:
-          token: ${{ secrets.OKTETO_TOKEN }}
-          manifest: ./Ingredient-service/okteto.yml
-          image: ${{ secrets.DOCKER_USER }}/ingredient-service:latest
-          namespace: ${{ secrets.OKTETO_NAMESPACE }}
-    
+  
   userservice:
     runs-on: ubuntu-latest
     name: Java 17 build, test, deliver user-service container
@@ -100,14 +84,6 @@ jobs:
       - name: Upload container to Docker Hub with Push
         run: docker push ${{ secrets.DOCKER_USER }}/user-service:latest
 
-      - name: Deploy to Okteto
-        uses: okteto/deploy-action@v1
-        with:
-          token: ${{ secrets.OKTETO_TOKEN }}
-          manifest: ./User-service/okteto.yml
-          image: ${{ secrets.DOCKER_USER }}/user-service:latest
-          namespace: ${{ secrets.OKTETO_NAMESPACE }}
-    
   ratingservice:
     runs-on: ubuntu-latest
     name: Java 17 build, test, deliver rating-service container
@@ -135,14 +111,6 @@ jobs:
       - name: Upload container to Docker Hub with Push
         run: docker push ${{ secrets.DOCKER_USER }}/rating-service:latest
 
-      - name: Deploy to Okteto
-        uses: okteto/deploy-action@v1
-        with:
-          token: ${{ secrets.OKTETO_TOKEN }}
-          manifest: ./Rating-service/okteto.yml
-          image: ${{ secrets.DOCKER_USER }}/rating-service:latest
-          namespace: ${{ secrets.OKTETO_NAMESPACE }}
-    
   apigateway:
     runs-on: ubuntu-latest
     name: Java 17 build, test, deliver api-gateway container
@@ -169,11 +137,3 @@ jobs:
 
     - name: Upload container to Docker Hub with Push
       run: docker push ${{ secrets.DOCKER_USER }}/api-gateway:latest
-
-    - name: Deploy to Okteto
-      uses: okteto/deploy-action@v1
-      with:
-        token: ${{ secrets.OKTETO_TOKEN }}
-        manifest: ./api-gateway/okteto.yml
-        image: ${{ secrets.DOCKER_USER }}/api-gateway:latest
-        namespace: ${{ secrets.OKTETO_NAMESPACE }}
