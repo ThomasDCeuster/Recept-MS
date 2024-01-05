@@ -34,7 +34,7 @@ services:
  ingredient-service:
   depends_on:
     - mongo-ingredients
-  image: Recept-MS/ingredient-service
+  image: unsecurytest/ingredient-service
   ports:
     - 8080:8080
   links:
@@ -46,7 +46,7 @@ services:
  user-service:
    depends_on:
      - mongo-users
-   image: Recept-MS/user-service
+   image: unsecurytest/user-service
    ports:
      - 8083:8083
    links:
@@ -58,7 +58,7 @@ services:
  rating-service:
   depends_on:
     - mysql-rating
-  image: Recept-MS/rating-service
+  image: unsecurytest/rating-service
   ports:
     - 8082:8082
   links:
@@ -74,7 +74,7 @@ services:
     - ingredient-service
     - user-service
     - rating-service
-  image: Recept-MS/recipe-service
+  image: unsecurytest/recipe-service
   ports:
     - 8081:8081
   links:
@@ -94,7 +94,7 @@ services:
    depends_on:
      - ingredient-service
      - recipe-service
-   image: Recept-MS/api-gateway
+   image: unsecurytest/api-gateway
    ports:
      - 8083:8083
    links:
