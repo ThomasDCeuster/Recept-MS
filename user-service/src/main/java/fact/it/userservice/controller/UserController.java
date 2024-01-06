@@ -1,6 +1,6 @@
 package fact.it.userservice.controller;
 
-import fact.it.userservice.dto.UserResponse;
+import fact.it.userservice.dto.*;
 import fact.it.userservice.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
