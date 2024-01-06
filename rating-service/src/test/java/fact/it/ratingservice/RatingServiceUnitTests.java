@@ -29,14 +29,14 @@ public class RatingServiceUnitTests {
     public void testGetRatingsByName() {
         // Arrange
         Rating rating = new Rating();
-        rating.setId(1);
+        rating.setId(1L);
         rating.setName("Test Rating");
         rating.setRating(4.5);
 
         when(ratingRepository.findByNameIn("Test")).thenReturn(Arrays.asList(rating));
 
         // Act
-        List<RatingResponse> ratings = ingredientService.getIngredientById("1");
+        List<RatingResponse> ratings = ratingService.getIngredientByName("Test");
 
         // Assert
         assertEquals(1, ratings.size());
