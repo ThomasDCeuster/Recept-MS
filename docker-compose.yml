@@ -24,14 +24,12 @@ services:
   environment:
    MYSQL_ROOT_PASSWORD: abc123
 
- mysql-user:
-   image: mysql:latest
+ mongo-users:
+   image: mongo:latest
    ports:
-     - 3308:3306
+     - 27018:27017
    volumes:
-     - mysql_user_data:/var/lib/mysql
-   environment:
-     MYSQL_ROOT_PASSWORD: abc123
+     - mongodb_user_data:/data/db
     
  ingredient-service:
   depends_on:
@@ -47,17 +45,15 @@ services:
 
  user-service:
   depends_on:
-    - mysql-user
+    - mongo-users
   image: r0882755718/user-service
   ports:
     - 8083:8083
   links:
-    - mysql-user
+    - mongo-users
   environment:
-    MYSQL_DB_USERNAME: root
-    MYSQL_DB_PASSWORD: abc123
-    MYSQL_DB_HOST: mysql-user
-    MYSQL_DB_PORT: 3308
+    MONGODB_PORT: 27018
+    MONGODB_HOST: mongo-users
    
  rating-service:
   depends_on:
@@ -111,5 +107,5 @@ services:
 volumes:
  mysql_rating_data:
  mongodb_ingredient_data:
- mysql_user_data:
+ mongodb_user_data:
  mysql_recipe_data:
