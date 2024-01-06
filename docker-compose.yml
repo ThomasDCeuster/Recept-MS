@@ -46,18 +46,18 @@ services:
    MONGODB_HOST: mongo-ingredients
 
  user-service:
-   depends_on:
-     - mysql-user
-   image: r0882755718/user-service
-   ports:
-     - 8083:8083
-   links:
-     - mysql-user
-   environment:
-     MYSQL_DB_USERNAME: root
-     MYSQL_DB_PASSWORD: abc123
-     MYSQL_DB_HOST: mysql-user
-     MYSQL_DB_PORT: 3308
+  depends_on:
+    - mysql-user
+  image: r0882755718/user-service
+  ports:
+    - 8083:8083
+  links:
+    - mysql-user
+  environment:
+   MYSQL_DB_USERNAME: root
+   MYSQL_DB_PASSWORD: abc123
+   MYSQL_DB_HOST: mysql-user
+   MYSQL_DB_PORT: 3308
    
  rating-service:
   depends_on:
