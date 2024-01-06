@@ -15,7 +15,7 @@ import java.util.List;
 public class UserController {
     private final UserService userService;
 
-    @PostMapping
+    /*@PostMapping
     @ResponseStatus(HttpStatus.OK)
     public void createUser(@RequestBody UserRequest userRequest) {
         {
@@ -33,5 +33,5 @@ public class UserController {
     @ResponseStatus(HttpStatus.OK)
     public List<UserResponse> getAllUsers() {
         return userService.getAllUsers();
-    }
+    }*/
 }
