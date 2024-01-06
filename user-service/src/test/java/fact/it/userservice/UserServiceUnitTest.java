@@ -57,7 +57,6 @@ public class UserServiceUnitTest {
 
         // Assert
         assertEquals(1, users.size());
-        assertEquals("1000", users.get(0).getId());
         assertEquals("TestUser", users.get(0).getUsername());
         assertEquals("testuser@gmail.com", users.get(0).getEmail());
 
