@@ -1,10 +1,10 @@
 services:
- mongo-products:
+ mongo-ingredients:
   image: mongo:latest
   ports:
     - 27017:27017
   volumes:
-    - mongodb_product_data:/data/db
+    - mongodb_ingredient_data:/data/db
     
  mysql-order:
   image: mysql:latest
@@ -24,17 +24,17 @@ services:
   environment:
    MYSQL_ROOT_PASSWORD: abc123
     
- product-service:
+ ingredient-service:
   depends_on:
-    - mongo-products
-  image: miverboven/product-service
+    - mongo-ingredients
+  image: r0882755718/ingredient-service
   ports:
     - 8080:8080
   links:
-    - mongo-products
+    - mongo-ingredients
   environment:
    MONGODB_PORT: 27017
-   MONGODB_HOST: mongo-products
+   MONGODB_HOST: mongo-ingredients
    
  inventory-service:
   depends_on:
@@ -52,16 +52,16 @@ services:
 
  order-service:
   depends_on:
-    - product-service
+    - ingredient-service
     - inventory-service
   image: miverboven/order-service
   ports:
     - 8081:8081
   links:
-    - product-service
+    - ingredient-service
     - inventory-service
   environment:
-   PRODUCT_SERVICE_BASEURL: product-service:8080
+   INGREDIENT_SERVICE_BASEURL: ingredient-service:8080
    INVENTORY_INFO_SERVICE_BASEURL: inventory-service:8082
    MYSQL_DB_USERNAME: root
    MYSQL_DB_PASSWORD: abc123
@@ -70,19 +70,19 @@ services:
 
  api-gateway:
    depends_on:
-     - product-service
+     - ingredient-service
      - order-service
    image: miverboven/ede-api-gateway
    ports:
      - 8083:8083
    links:
-     - product-service
+     - ingredient-service
      - order-service
    environment:
-     PRODUCT_SERVICE_BASEURL: product-service:8080
+     INGREDIENT_SERVICE_BASEURL: ingredient-service:8080
      ORDER_SERVICE_BASEURL: order-service:8081
 
 volumes:
- mongodb_product_data:
+ mongodb_ingredient_data:
  mysql_inventory_data:
  mysql_order_data:

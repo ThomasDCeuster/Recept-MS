@@ -1,22 +1,21 @@
-package fact.it.productservice.model;
+package fact.it.ingredientservice.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigDecimal;
 
-@Document(value = "product")
+@Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-@Data
-public class Product {
+public class IngredientRequest {
     private String id;
-    private String skuCode;
     private String name;
     private String description;
+    private String measurementUnit;
     private BigDecimal price;
+    private String amount;
 }
