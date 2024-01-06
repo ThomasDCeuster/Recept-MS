@@ -1,13 +1,13 @@
-package fact.it.productservice;
+package fact.it.ingredientservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ProductServiceApplication {
+public class IngredientServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ProductServiceApplication.class, args);
+        SpringApplication.run(IngredientServiceApplication.class, args);
     }
 
 }

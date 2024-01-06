@@ -23,8 +23,8 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final WebClient webClient;
 
-    @Value("${productservice.baseurl}")
-    private String productServiceBaseUrl;
+    @Value("${ingredientservice.baseurl}")
+    private String ingredientServiceBaseUrl;
 
     @Value("${inventoryservice.baseurl}")
     private String inventoryServiceBaseUrl;
@@ -56,7 +56,7 @@ public class OrderService {
 
         if(allProductsInStock){
             ProductResponse[] productResponseArray = webClient.get()
-                    .uri("http://" + productServiceBaseUrl + "/api/product",
+                    .uri("http://" + ingredientServiceBaseUrl + "/api/ingredient",
                             uriBuilder -> uriBuilder.queryParam("skuCode", skuCodes).build())
                     .retrieve()
                     .bodyToMono(ProductResponse[].class)

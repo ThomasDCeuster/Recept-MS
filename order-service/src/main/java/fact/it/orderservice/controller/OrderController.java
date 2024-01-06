@@ -26,7 +26,7 @@ public class OrderController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<OrderResponse> getAllProducts() {
+    public List<OrderResponse> getAllIngredients() {
         return orderService.getAllOrders();
     }
 }
