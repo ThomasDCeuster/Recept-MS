@@ -29,9 +29,9 @@ public class IngredientService {
     }
 
     public List<IngredientResponse> getIngredientById(String id) {
-        Ingredient ingredient = ingredientRepository.findByIdIn(id);
+        List<Ingredient> ingredients = ingredientRepository.findByIdIn(id);
 
-        return ingredient;
+        return ingredients.stream().map(this::mapToIngredientResponse).toList();
     }
 
     private IngredientResponse mapToIngredientResponse(Ingredient ingredient) {

@@ -17,12 +17,12 @@ public class OrderController {
 
     private final OrderService orderService;
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.OK)
-    public String placeOrder(@RequestBody OrderRequest orderRequest) {
-        boolean result = orderService.placeOrder(orderRequest);
-        return (result ? "Order placed successfully" : "Order placement failed");
-    }
+//    @PostMapping
+//    @ResponseStatus(HttpStatus.OK)
+//    public String placeOrder(@RequestBody OrderRequest orderRequest) {
+//        boolean result = orderService.placeOrder(orderRequest);
+//        return (result ? "Order placed successfully" : "Order placement failed");
+//    }
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
