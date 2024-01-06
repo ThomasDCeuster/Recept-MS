@@ -27,7 +27,7 @@ services:
  ingredient-service:
   depends_on:
     - mongo-ingredients
-  image: miverboven/ingredient-service
+  image: r0882755718/ingredient-service
   ports:
     - 8080:8080
   links:
