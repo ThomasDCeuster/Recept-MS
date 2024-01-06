@@ -1,4 +1,4 @@
-package fact.it.ratingservice.model;
+package fact.it.userservice.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
