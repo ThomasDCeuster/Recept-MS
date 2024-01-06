@@ -15,12 +15,12 @@ services:
   environment:
    MYSQL_ROOT_PASSWORD: abc123
     
- mysql-inventory:
+ mysql-rating:
   image: mysql:latest
   ports:
     - 3307:3306
   volumes:
-    - mysql_inventory_data:/var/lib/mysql
+    - mysql_rating_data:/var/lib/mysql
   environment:
    MYSQL_ROOT_PASSWORD: abc123
     
