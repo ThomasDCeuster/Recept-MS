@@ -16,13 +16,13 @@ import java.util.List;
 public class UserService {
     private final UserRepository userRepository;
 
-    public void createUser(UserRequest userRequest) {
-        User user = User.builder()
-                .username(userRequest.getUsername())
-                .build();
-
-        userRepository.save(user);
-    }
+//    public void createUser(UserRequest userRequest) {
+//        User user = User.builder()
+//                .username(userRequest.getUsername())
+//                .build();
+//
+//        userRepository.save(user);
+//    }
 
     public List<UserResponse> getUserById(Long id) {
         List<User> users = userRepository.findByIdIn(id);
