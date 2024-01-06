@@ -16,21 +16,21 @@ public class RatingService {
 
     private final RatingRepository ratingRepository;
 
-//    @PostConstruct
-//    public void loadData() {
-//        if(ratingRepository.count() <= 0){
-//            Rating rating = new Rating();
-//            rating.setName("tube6in");
-//            stockItem.setQuantity(100);
-//
-//            StockItem stockItem1 = new StockItem();
-//            stockItem1.setSkuCode("beam10ft");
-//            stockItem1.setQuantity(0);
-//
-//            inventoryRepository.save(stockItem);
-//            inventoryRepository.save(stockItem1);
-//        }
-//    }
+    @PostConstruct
+    public void loadData() {
+        if(ratingRepository.count() <= 0){
+            Rating rating1 = new Rating();
+            rating1.setName("Spaghetti");
+            rating1.setRating(4.0);
+
+            Rating rating2 = new Rating();
+            rating2.setName("Chicken Broccoli");
+            rating2.setRating(3.5);
+
+            ratingRepository.save(rating1);
+            ratingRepository.save(rating2);
+        }
+    }
 
     public List<RatingResponse> getRatingByName(String name) {
         List<Rating> ratings = ratingRepository.findByNameIn(name);
