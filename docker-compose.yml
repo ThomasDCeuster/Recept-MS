@@ -6,7 +6,7 @@ services:
   volumes:
     - mongodb_ingredient_data:/data/db
 
- mongo-user:
+ mongo-users:
    image: mongo:latest
    ports:
      - 27018:27017
@@ -45,7 +45,7 @@ services:
 
  user-service:
   depends_on:
-    - mongo-user
+    - mongo-users
   image: r0882755718/user-service
   ports:
     - 8083:8083
@@ -53,7 +53,7 @@ services:
     - mongo-user
   environment:
     MONGODB_PORT: 27018
-    MONGODB_HOST: mongo-user
+    MONGODB_HOST: mongo-users
    
  rating-service:
   depends_on:
