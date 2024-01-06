@@ -16,10 +16,9 @@ public class RatingController{
     private final RatingService ratingService;
 
     // http://localhost:8082/api/inventory?skuCode=tube6in&skuCode=beam10ft
-    @GetMapping
+   /* @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<RatingResponse> isInStock
-    (@RequestParam List<String> skuCode) {
-        return ratingService.isInStock(skuCode);
-    }
+    public List<RatingResponse> getRatingById(@RequestParam List<String> id) {
+        return ratingService.isInStock(id);
+    }*/
 }
