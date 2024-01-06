@@ -25,20 +25,20 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: product-service
-          uri: http://${PRODUCT_SERVICE_BASEURL:localhost:8080}
+        - id: ingredient-service
+          uri: http://${INGREDIENT_SERVICE_BASEURL:localhost:8080}
           predicates:
-            - Path=/products
+            - Path=/ingredients
             - Method=POST
           filters:
-            - SetPath=/api/product
-        - id: product-service-all
-          uri: http://${PRODUCT_SERVICE_BASEURL:localhost:8080}
+            - SetPath=/api/ingredient
+        - id: ingredient-service-all
+          uri: http://${INGREDIENT_SERVICE_BASEURL:localhost:8080}
           predicates:
-            - Path=/products
+            - Path=/ingredients
             - Method=GET
           filters:
-            - SetPath=/api/product/all
+            - SetPath=/api/ingredient/all
         - id: order-service
           uri: http://${ORDER_SERVICE_BASEURL:localhost:8081}
           predicates:

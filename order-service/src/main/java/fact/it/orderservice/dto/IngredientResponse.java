@@ -1,4 +1,4 @@
-package fact.it.productservice.dto;
+package fact.it.orderservice.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,9 +11,11 @@ import java.math.BigDecimal;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductRequest {
-    private String skuCode;
+public class IngredientResponse {
+    private String id;
     private String name;
     private String description;
+    private String measurementUnit;
     private BigDecimal price;
+    private String amount;
 }

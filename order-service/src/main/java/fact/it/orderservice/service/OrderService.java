@@ -23,64 +23,64 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final WebClient webClient;
 
-    @Value("${productservice.baseurl}")
-    private String productServiceBaseUrl;
+    @Value("${ingredientservice.baseurl}")
+    private String ingredientServiceBaseUrl;
 
     @Value("${inventoryservice.baseurl}")
     private String inventoryServiceBaseUrl;
 
-    public boolean placeOrder(OrderRequest orderRequest) {
-        Order order = new Order();
-        order.setOrderNumber(UUID.randomUUID().toString());
-
-        List<OrderLineItem> orderLineItems = orderRequest.getOrderLineItemsDtoList()
-                .stream()
-                .map(this::mapToOrderLineItem)
-                .toList();
-
-        order.setOrderLineItemsList(orderLineItems);
-
-        List<String> skuCodes = order.getOrderLineItemsList().stream()
-                .map(OrderLineItem::getSkuCode)
-                .toList();
-
-        InventoryResponse[] inventoryResponseArray = webClient.get()
-                .uri("http://" + inventoryServiceBaseUrl + "/api/inventory",
-                        uriBuilder -> uriBuilder.queryParam("skuCode", skuCodes).build())
-                .retrieve()
-                .bodyToMono(InventoryResponse[].class)
-                .block();
-
-        boolean allProductsInStock = Arrays.stream(inventoryResponseArray)
-                .allMatch(InventoryResponse::isInStock);
-
-        if(allProductsInStock){
-            ProductResponse[] productResponseArray = webClient.get()
-                    .uri("http://" + productServiceBaseUrl + "/api/product",
-                            uriBuilder -> uriBuilder.queryParam("skuCode", skuCodes).build())
-                    .retrieve()
-                    .bodyToMono(ProductResponse[].class)
-                    .block();
-
-            order.getOrderLineItemsList().stream()
-                    .map(orderItem -> {
-                        ProductResponse product = Arrays.stream(productResponseArray)
-                                .filter(p -> p.getSkuCode().equals(orderItem.getSkuCode()))
-                                .findFirst()
-                                .orElse(null);
-                        if (product != null) {
-                            orderItem.setPrice(product.getPrice());
-                        }
-                        return orderItem;
-                    })
-                    .collect(Collectors.toList());
-
-            orderRepository.save(order);
-            return true;
-        } else {
-            return false;
-        }
-    }
+//    public boolean placeOrder(OrderRequest orderRequest) {
+//        Order order = new Order();
+//        order.setOrderNumber(UUID.randomUUID().toString());
+//
+//        List<OrderLineItem> orderLineItems = orderRequest.getOrderLineItemsDtoList()
+//                .stream()
+//                .map(this::mapToOrderLineItem)
+//                .toList();
+//
+//        order.setOrderLineItemsList(orderLineItems);
+//
+//        List<String> skuCodes = order.getOrderLineItemsList().stream()
+//                .map(OrderLineItem::getSkuCode)
+//                .toList();
+//
+//        InventoryResponse[] inventoryResponseArray = webClient.get()
+//                .uri("http://" + inventoryServiceBaseUrl + "/api/inventory",
+//                        uriBuilder -> uriBuilder.queryParam("skuCode", skuCodes).build())
+//                .retrieve()
+//                .bodyToMono(InventoryResponse[].class)
+//                .block();
+//
+//        boolean allProductsInStock = Arrays.stream(inventoryResponseArray)
+//                .allMatch(InventoryResponse::isInStock);
+//
+//        if(allProductsInStock){
+//            ProductResponse[] productResponseArray = webClient.get()
+//                    .uri("http://" + ingredientServiceBaseUrl + "/api/ingredient",
+//                            uriBuilder -> uriBuilder.queryParam("skuCode", skuCodes).build())
+//                    .retrieve()
+//                    .bodyToMono(ProductResponse[].class)
+//                    .block();
+//
+//            order.getOrderLineItemsList().stream()
+//                    .map(orderItem -> {
+//                        ProductResponse product = Arrays.stream(productResponseArray)
+//                                .filter(p -> p.getSkuCode().equals(orderItem.getSkuCode()))
+//                                .findFirst()
+//                                .orElse(null);
+//                        if (product != null) {
+//                            orderItem.setPrice(product.getPrice());
+//                        }
+//                        return orderItem;
+//                    })
+//                    .collect(Collectors.toList());
+//
+//            orderRepository.save(order);
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
 
     public List<OrderResponse> getAllOrders() {
         List<Order> orders = orderRepository.findAll();
