@@ -23,15 +23,15 @@ public class UserController{
 //        }
 //    }
 
-    @GetMapping
-    @ResponseStatus(HttpStatus.OK)
-    public List<UserResponse> getUserById(@RequestParam Long id) {
-        return userService.getUserById(id);
-    }
-
-    @GetMapping("/all")
-    @ResponseStatus(HttpStatus.OK)
-    public List<UserResponse> getAllUsers() {
-        return userService.getAllUsers();
-    }
+//    @GetMapping
+//    @ResponseStatus(HttpStatus.OK)
+//    public List<UserResponse> getUserById(@RequestParam Long id) {
+//        return userService.getUserById(id);
+//    }
+//
+//    @GetMapping("/all")
+//    @ResponseStatus(HttpStatus.OK)
+//    public List<UserResponse> getAllUsers() {
+//        return userService.getAllUsers();
+//    }
 }
