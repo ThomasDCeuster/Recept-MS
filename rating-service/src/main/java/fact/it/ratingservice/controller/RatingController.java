@@ -16,9 +16,9 @@ public class RatingController{
     private final RatingService ratingService;
 
     // http://localhost:8082/api/rating?name=Spaghetti
-    @GetMapping
-    @ResponseStatus(HttpStatus.OK)
-    public List<RatingResponse> getRatingByName(@RequestParam List<String> name) {
-        return ratingService.isRated(name);
-    }
+//    @GetMapping
+//    @ResponseStatus(HttpStatus.OK)
+//    public List<RatingResponse> getRatingByName(@RequestParam List<String> name) {
+//        return ratingService.isRated(name);
+//    }
 }
