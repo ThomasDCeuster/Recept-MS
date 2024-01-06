@@ -33,10 +33,10 @@ public class RatingServiceUnitTests {
         rating.setName("Test Rating");
         rating.setRating(4.5);
 
-        when(ratingRepository.findByNameIn("Test")).thenReturn(Arrays.asList(rating));
+        when(ratingRepository.findByNameIn("Test Rating")).thenReturn(Arrays.asList(rating));
 
         // Act
-        List<RatingResponse> ratings = ratingService.getRatingByName("Test");
+        List<RatingResponse> ratings = ratingService.getRatingByName("Test Rating");
 
         // Assert
         assertEquals(1, ratings.size());
