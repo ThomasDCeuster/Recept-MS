@@ -49,15 +49,13 @@ public class UserServiceUnitTest {
         user.setId("1000");
         user.setUsername("TestUser");
         user.setEmail("testuser@gmail.com");
-        List<User> list = Arrays.asList(user);
 
-        when(userRepository.findAll()).thenReturn(list);
+        when(userRepository.findAll()).thenReturn(Arrays.asList(user));
 
         // Act
         List<UserResponse> users = userService.getAllUsers();
 
         // Assert
-        System.out.println(users);
         assertEquals(1, users.size());
         assertEquals("TestUser", users.get(0).getUsername());
         assertEquals("testuser@gmail.com", users.get(0).getEmail());
