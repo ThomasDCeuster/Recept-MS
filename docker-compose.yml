@@ -5,13 +5,6 @@ services:
     - 27017:27017
   volumes:
     - mongodb_ingredient_data:/data/db
-
- mongo-users:
-   image: mongo:latest
-   ports:
-     - 27018:27017
-   volumes:
-     - mongodb_user_data:/data/db
     
  mysql-recipe:
   image: mysql:latest
@@ -30,6 +23,15 @@ services:
     - mysql_rating_data:/var/lib/mysql
   environment:
    MYSQL_ROOT_PASSWORD: abc123
+
+ mysql-user:
+   image: mysql:latest
+   ports:
+     - 3308:3306
+   volumes:
+     - mysql_user_data:/var/lib/mysql
+   environment:
+     MYSQL_ROOT_PASSWORD: abc123
     
  ingredient-service:
   depends_on:
@@ -45,15 +47,17 @@ services:
 
  user-service:
   depends_on:
-    - mongo-users
+    - mysql-user
   image: r0882755718/user-service
   ports:
     - 8083:8083
   links:
-    - mongo-users
+    - mysql-user
   environment:
-   MONGODB_PORT: 27018
-   MONGODB_HOST: mongo-users
+    MYSQL_DB_USERNAME: root
+    MYSQL_DB_PASSWORD: abc123
+    MYSQL_DB_HOST: mysql-user
+    MYSQL_DB_PORT: 3308
    
  rating-service:
   depends_on:
@@ -107,5 +111,5 @@ services:
 volumes:
  mysql_rating_data:
  mongodb_ingredient_data:
- mongodb_user_data:
+ mysql_user_data:
  mysql_recipe_data:

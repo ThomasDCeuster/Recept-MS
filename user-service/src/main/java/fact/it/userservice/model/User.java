@@ -1,19 +1,21 @@
 package fact.it.userservice.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.mongodb.core.mapping.Document;
-import java.math.BigDecimal;
+import lombok.Setter;
 
+import jakarta.persistence.*;
 
-@Document(value = "user")
+@Entity
+@Table(name = "user")
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-@Data
 public class User {
-    private String id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String username;
 }
