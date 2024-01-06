@@ -72,7 +72,7 @@ services:
    depends_on:
      - ingredient-service
      - recipe-service
-   image: miverboven/ede-api-gateway
+   image: r0882755718/ede-api-gateway
    ports:
      - 8083:8083
    links:
