@@ -64,9 +64,9 @@ public class IngredientServiceUnitTest {
         assertEquals(1, ingredients.size());
         assertEquals("Test Ingredient", ingredients.get(0).getName());
         assertEquals("Test Description", ingredients.get(0).getDescription());
-        assertEquals("liter", ingredients.get(0).getMeasurementUnit())
+        assertEquals("liter", ingredients.get(0).getMeasurementUnit());
         assertEquals(BigDecimal.valueOf(5), ingredients.get(0).getPrice());
-        assertEquals(1.0, ingredients.get(0).getAmount())
+        assertEquals(1.0, ingredients.get(0).getAmount());
 
         verify(ingredientRepository, times(1)).findAll();
     }
@@ -91,9 +91,9 @@ public class IngredientServiceUnitTest {
         assertEquals(1, ingredients.size());
         assertEquals("Test Ingredient", ingredients.get(0).getName());
         assertEquals("Test Description", ingredients.get(0).getDescription());
-        assertEquals("liter", ingredients.get(0).getMeasurementUnit())
+        assertEquals("liter", ingredients.get(0).getMeasurementUnit());
         assertEquals(BigDecimal.valueOf(5), ingredients.get(0).getPrice());
-        assertEquals(1.0, ingredients.get(0).getAmount())
+        assertEquals(1.0, ingredients.get(0).getAmount());
 
         verify(ingredientRepository, times(1)).findByIdIn(Arrays.asList(ingredient.getId()));
     }
