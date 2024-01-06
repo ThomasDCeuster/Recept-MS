@@ -49,8 +49,9 @@ public class UserServiceUnitTest {
         user.setId("1000");
         user.setUsername("TestUser");
         user.setEmail("testuser@gmail.com");
+        List<User> list = Arrays.asList(user);
 
-        when(userRepository.findAll()).thenReturn(List.of(user));
+        when(userRepository.findAll()).thenReturn(list);
 
         // Act
         List<UserResponse> users = userService.getAllUsers();
