@@ -35,7 +35,7 @@ public class IngredientServiceUnitTest {
         ingredientRequest.setDescription("Test Description");
         ingredientRequest.setMeasurementUnit("liter");
         ingredientRequest.setPrice(BigDecimal.valueOf(5));
-        ingredientRequest.setAmount(5);
+        ingredientRequest.setAmount(1.0);
 
         // Act
         ingredientService.createIngredient(ingredientRequest);
