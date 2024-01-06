@@ -24,7 +24,7 @@ public class UserService {
 //        userRepository.save(user);
 //    }
 
-    public List<UserResponse> getUserById(Long id) {
+    public List<UserResponse> getUserById(String id) {
         List<User> users = userRepository.findByIdIn(id);
 
         return users.stream().map(this::mapToUserResponse).toList();
