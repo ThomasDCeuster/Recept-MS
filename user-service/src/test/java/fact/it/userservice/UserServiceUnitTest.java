@@ -27,70 +27,66 @@ public class UserServiceUnitTest {
     @Mock
     private UserRepository userRepository;
 
-//    @Test
-//    public void testCreateProduct() {
-//        // Arrange
-//        ProductRequest productRequest = new ProductRequest();
-//        productRequest.setSkuCode("SKU123");
-//        productRequest.setName("Test Product");
-//        productRequest.setDescription("Test Description");
-//        productRequest.setPrice(BigDecimal.valueOf(100));
-//
-//        // Act
-//        productService.createProduct(productRequest);
-//
-//        // Assert
-//        verify(productRepository, times(1)).save(any(Product.class));
-//    }
-//
-//    @Test
-//    public void testGetAllProducts() {
-//        // Arrange
-//        Product product = new Product();
-//        product.setId("1");
-//        product.setSkuCode("SKU123");
-//        product.setName("Test Product");
-//        product.setDescription("Test Description");
-//        product.setPrice(BigDecimal.valueOf(100));
-//
-//        when(productRepository.findAll()).thenReturn(Arrays.asList(product));
-//
-//        // Act
-//        List<ProductResponse> products = productService.getAllProducts();
-//
-//        // Assert
-//        assertEquals(1, products.size());
-//        assertEquals("SKU123", products.get(0).getSkuCode());
-//        assertEquals("Test Product", products.get(0).getName());
-//        assertEquals("Test Description", products.get(0).getDescription());
-//        assertEquals(BigDecimal.valueOf(100), products.get(0).getPrice());
-//
-//        verify(productRepository, times(1)).findAll();
-//    }
-//
-//    @Test
-//    public void testGetAllProductsBySkuCode() {
-//        // Arrange
-//        Product product = new Product();
-//        product.setId("1");
-//        product.setSkuCode("SKU123");
-//        product.setName("Test Product");
-//        product.setDescription("Test Description");
-//        product.setPrice(BigDecimal.valueOf(100));
-//
-//        when(productRepository.findBySkuCodeIn(Arrays.asList("SKU123"))).thenReturn(Arrays.asList(product));
-//
-//        // Act
-//        List<ProductResponse> products = productService.getAllProductsBySkuCode(Arrays.asList("SKU123"));
-//
-//        // Assert
-//        assertEquals(1, products.size());
-//        assertEquals("1", products.get(0).getId());
-//        assertEquals("SKU123", products.get(0).getSkuCode());
-//        assertEquals("Test Product", products.get(0).getName());
-//        assertEquals("Test Description", products.get(0).getDescription());
-//        assertEquals(BigDecimal.valueOf(100), products.get(0).getPrice());
-//
-//        verify(productRepository, times(1)).findBySkuCodeIn(Arrays.asList(product.getSkuCode()));
-//    }
+    @Test
+    public void testCreateUser() {
+        // Arrange
+        UserRequest userRequest = new UserRequest();
+        userRequest.setId("1000");
+        userRequest.setUsername("TestUser");
+        userRequest.setEmail("testuser@gmail.com");
+
+        // Act
+        userService.createUser(userRequest);
+
+        // Assert
+        verify(userRepository, times(1)).save(any(User.class));
+    }
+
+    @Test
+    public void testGetAllUsers() {
+        // Arrange
+        User user = new User();
+        user.setId("1000");
+        user.setUsername("TestUser");
+        user.setEmail("testuser@gmail.com");
+
+        when(userRepository.findAll()).thenReturn(Arrays.asList(user));
+
+        // Act
+        List<UserResponse> users = userService.getAllUsers();
+
+        // Assert
+        assertEquals(1, users.size());
+        assertEquals("TestUser", users.get(0).getUsername());
+        assertEquals("testuser@gmail.com", users.get(0).getEmail());
+
+        verify(userRepository, times(1)).findAll();
+    }
+
+
+    @Test
+    void getUserByIdTest() {
+        // Arrange
+        String userId = "123";
+        User user = new User();
+        user.setId("1000");
+        user.setUsername("TestUser");
+        user.setEmail("testuser@gmail.com");
+
+        List<User> mockUsers = Arrays.asList(user);
+
+        // Mock the userRepository behavior
+        when(userRepository.findByIdIn(userId)).thenReturn(mockUsers);
+
+        // Act
+        List<UserResponse> result = userService.getUserById(userId);
+
+        // Assert
+        assertEquals(1, result.size());
+        assertEquals("TestUser", result.get(0).getUsername());
+
+        // Optionally, you can verify that the method of userRepository was called with the correct parameter
+        verify(userRepository, times(1)).findByIdIn(userId);
+    }
+
 }
