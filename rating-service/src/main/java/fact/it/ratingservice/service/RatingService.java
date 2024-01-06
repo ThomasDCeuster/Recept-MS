@@ -31,15 +31,16 @@ public class RatingService {
 //        }
 //    }
 
-//    @Transactional(readOnly = true)
-//    public List<RatingResponse> isRated(List<String> name) {
-//
-//        return ratingRepository.findByNameIn(name).stream()
-//                .map(rating ->
-//                        RatingResponse.builder()
-//                                .name(rating.getName())
-//                                .rating(rating.getRating() > 0)
-//                                .build()
-//                ).toList();
-//    }
+    public List<RatingResponse> getRatingByName(String name) {
+        List<Rating> ratings = ratingRepository.findByNameIn(name);
+
+        return ratings.stream().map(this::mapToRatingResponse).toList();
+    }
+
+    private RatingResponse mapToRatingResponse(Rating rating) {
+        return RatingResponse.builder()
+                .name(rating.getName())
+                .rating(rating.getRating())
+                .build();
+    }
 }
