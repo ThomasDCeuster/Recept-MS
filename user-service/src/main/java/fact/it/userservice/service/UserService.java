@@ -16,7 +16,7 @@ import java.util.List;
 public class UserService {
     private final UserRepository userRepository;
 
-    public void createUser(UserRequest userRequest) {
+    /*public void createUser(UserRequest userRequest) {
         User user = User.builder()
                 .username(userRequest.getUsername())
                 .build();
@@ -40,5 +40,5 @@ public class UserService {
         List<User> users = userRepository.findAll();
 
         return users.stream().map(this::mapToUserResponse).toList();
-    }
+    }*/
 }
