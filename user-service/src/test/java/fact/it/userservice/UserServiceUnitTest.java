@@ -57,6 +57,7 @@ public class UserServiceUnitTest {
         List<UserResponse> users = userService.getAllUsers();
 
         // Assert
+        System.out.println(users);
         assertEquals(1, users.size());
         assertEquals("TestUser", users.get(0).getUsername());
         assertEquals("testuser@gmail.com", users.get(0).getEmail());
