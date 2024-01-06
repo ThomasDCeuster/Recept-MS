@@ -29,9 +29,9 @@ jobs:
 
       - name: Upload container to Docker Hub with Push
         run: docker push ${{ secrets.DOCKER_USER }}/ingredient-service:latest
-  inventoryservice:
+  ratingservice:
     runs-on: ubuntu-latest
-    name: Java 17 build, test, deliver inventory-service container
+    name: Java 17 build, test, deliver rating-service container
     steps:
       - name: Check out repository
         uses: actions/checkout@v3
@@ -44,17 +44,17 @@ jobs:
           distribution: adopt
 
       - name: Build, test and package project
-        working-directory: ./inventory-service
+        working-directory: ./rating-service
         run: mvn package -B
 
       - name: Docker login
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Docker Build
-        run: docker build -t ${{ secrets.DOCKER_USER }}/inventory-service:latest ./inventory-service
+        run: docker build -t ${{ secrets.DOCKER_USER }}/rating-service:latest ./rating-service
 
       - name: Upload container to Docker Hub with Push
-        run: docker push ${{ secrets.DOCKER_USER }}/inventory-service:latest
+        run: docker push ${{ secrets.DOCKER_USER }}/rating-service:latest
   recipeservice:
     runs-on: ubuntu-latest
     name: Java 17 build, test, deliver recipe-service container
