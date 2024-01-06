@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class RatingResponse
+public class RatingResponse {
     private String name;
     private Double rating;
 }
