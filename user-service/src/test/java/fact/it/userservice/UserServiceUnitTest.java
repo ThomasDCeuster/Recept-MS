@@ -50,18 +50,17 @@ public class UserServiceUnitTest {
         user.setUsername("TestUser");
         user.setEmail("testuser@gmail.com");
 
-        when(userRepository.findAll()).thenReturn(Arrays.asList(user));
-
         // Act
-        List<UserResponse> users = userService.getAllUsers();
+        List<UserResponse> result = userService.getAllUsers();
 
         // Assert
-        assertEquals(1, users.size());
-        assertEquals("1000", users.get(0).getId());
-        assertEquals("TestUser", users.get(0).getUsername());
-        assertEquals("testuser@gmail.com", users.get(0).getEmail());
+        assertEquals(1, result.size());
+        assertEquals("1000", result.get(0).getId());
+        assertEquals("TestUser", result.get(0).getUsername());
+        assertEquals("testuser@gmail.com", result.get(0).getEmail());
 
         verify(userRepository, times(1)).findAll();
+
     }
 
 
