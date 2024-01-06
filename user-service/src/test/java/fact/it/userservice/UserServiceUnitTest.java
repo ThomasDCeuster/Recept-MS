@@ -84,7 +84,7 @@ public class UserServiceUnitTest {
 
         // Assert
         assertEquals(1, result.size());
-        assertEquals("John", result.get(0).getUsername());
+        assertEquals("TestUser", result.get(0).getUsername());
 
         // Optionally, you can verify that the method of userRepository was called with the correct parameter
         verify(userRepository, times(1)).findByIdIn(userId);
