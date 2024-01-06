@@ -1,6 +1,6 @@
 package fact.it.userservice.repository;
 
-import fact.it.userservice.model.Ingredient;
+import fact.it.userservice.model.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
