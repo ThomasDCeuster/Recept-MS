@@ -1,11 +1,12 @@
 package fact.it.userservice.model;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.mongodb.core.mapping.Document;
-import java.math.BigDecimal;
+import lombok.Setter;
+
+import java.util.List;
 
 
 @Document(value = "user")
