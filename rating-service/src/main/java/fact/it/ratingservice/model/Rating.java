@@ -1,4 +1,4 @@
-package fact.it.inventoryservice.model;
+package fact.it.ratingservice.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,15 +8,15 @@ import lombok.Setter;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "stockitem")
+@Table(name = "rating")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class StockItem {
+public class Rating {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String skuCode;
-    private Integer quantity;
+    private String name;
+    private Double rating;
 }

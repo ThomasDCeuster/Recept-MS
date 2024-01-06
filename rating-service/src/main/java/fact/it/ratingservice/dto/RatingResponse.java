@@ -1,4 +1,4 @@
-package fact.it.inventoryservice.dto;
+package fact.it.ratingservice.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class InventoryResponse {
-    private String skuCode;
-    private boolean isInStock;
+public class RatingResponse
+    private String name;
+    private Double rating;
 }

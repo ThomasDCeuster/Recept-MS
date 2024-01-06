@@ -1,6 +1,6 @@
-package fact.it.inventoryservice.repository;
+package fact.it.ratingservice.repository;
 
-import fact.it.inventoryservice.model.StockItem;
+import fact.it.ratingservice.model.Rating;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -10,6 +10,11 @@ import java.util.List;
 
 @Repository
 @Transactional
-public interface InventoryRepository extends JpaRepository<StockItem, Long> {
-    List<StockItem> findBySkuCodeIn(List<String> skuCode);
+public interface RatingRepository extends JpaRepository<Rating, Long> {
+    List<Rating> findByIdIn(List<String> id);
 }
+
+
+
+
+

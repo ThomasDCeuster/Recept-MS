@@ -1,7 +1,7 @@
-package fact.it.inventoryservice.controller;
+package fact.it.ratingservice.controller;
 
-import fact.it.inventoryservice.dto.InventoryResponse;
-import fact.it.inventoryservice.service.InventoryService;
+import fact.it.ratingservice.dto.RatingResponse;
+import fact.it.ratingservice.service.RatingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -9,17 +9,17 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/inventory")
+@RequestMapping("/api/rating")
 @RequiredArgsConstructor
-public class InventoryController {
+public class RatingController{
 
-    private final InventoryService inventoryService;
+    private final RatingService ratingService;
 
     // http://localhost:8082/api/inventory?skuCode=tube6in&skuCode=beam10ft
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<InventoryResponse> isInStock
+    public List<RatingResponse> isInStock
     (@RequestParam List<String> skuCode) {
-        return inventoryService.isInStock(skuCode);
+        return ratingService.isInStock(skuCode);
     }
 }

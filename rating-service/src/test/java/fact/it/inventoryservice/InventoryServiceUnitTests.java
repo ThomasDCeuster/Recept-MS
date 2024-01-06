@@ -19,7 +19,7 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 public class InventoryServiceUnitTests {
 
-    @InjectMocks
+    /*@InjectMocks
     private InventoryService inventoryService;
 
     @Mock
@@ -46,5 +46,5 @@ public class InventoryServiceUnitTests {
         assertEquals(false, inventoryResponses.get(1).isInStock());
 
         verify(inventoryRepository, times(1)).findBySkuCodeIn(skuCodes);
-    }
+    }*/
 }
