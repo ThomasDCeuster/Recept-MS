@@ -29,6 +29,9 @@ public class RecipeService {
     @Value("${ratingservice.baseurl}")
     private String ratingServiceBaseUrl;
 
+    @Value("${userservice.baseurl}")
+    private String userServiceBaseUrl;
+
     public boolean createRecipe(RecipeRequest recipeRequest) {
         Recipe recipe = new Recipe();
         recipe.setRecipeNumber(UUID.randomUUID().toString());
