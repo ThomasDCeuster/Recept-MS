@@ -9,6 +9,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "user")
+@Access(AccessType.PROPERTY)
 @Getter
 @Setter
 @AllArgsConstructor
