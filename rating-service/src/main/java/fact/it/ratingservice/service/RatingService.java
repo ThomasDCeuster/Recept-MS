@@ -1,8 +1,6 @@
-package fact.it.inventoryservice.service;
+package fact.it.ratingservice.service;
 
-import fact.it.inventoryservice.dto.InventoryResponse;
-import fact.it.inventoryservice.model.StockItem;
-import fact.it.inventoryservice.repository.InventoryRepository;
+import fact.it.ratingservice.repository.RatingRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,13 +10,13 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class InventoryService {
+public class RatingService {
 
-    private final InventoryRepository inventoryRepository;
+    private final RatingRepository ratingRepository;
 
     @PostConstruct
     public void loadData() {
-        if(inventoryRepository.count() <= 0){
+        /*if(inventoryRepository.count() <= 0){
             StockItem stockItem = new StockItem();
             stockItem.setSkuCode("tube6in");
             stockItem.setQuantity(100);
@@ -41,6 +39,6 @@ public class InventoryService {
                                 .skuCode(stockItem.getSkuCode())
                                 .isInStock(stockItem.getQuantity() > 0)
                                 .build()
-                ).toList();
+                ).toList();*/
     }
 }

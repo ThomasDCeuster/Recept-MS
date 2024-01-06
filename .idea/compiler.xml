@@ -8,22 +8,22 @@
         <outputRelativeToContentRoot value="true" />
         <module name="api-gateway" />
         <module name="ingredient-service" />
+        <module name="rating-service" />
         <module name="recipe-service" />
-        <module name="inventory-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="api-gateway" target="17" />
+      <module name="rating-service" target="17" />
       <module name="ingredient-service" target="17" />
-      <module name="inventory-service" target="17" />
       <module name="recipe-service" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="api-gateway" options="-parameters" />
+      <module name="rating-service" options="-parameters" />
       <module name="ingredient-service" options="-parameters" />
-      <module name="inventory-service" options="-parameters" />
       <module name="recipe-service" options="-parameters" />
     </option>
   </component>

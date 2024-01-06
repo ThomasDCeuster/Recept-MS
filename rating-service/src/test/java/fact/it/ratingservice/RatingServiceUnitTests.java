@@ -1,9 +1,9 @@
-package fact.it.inventoryservice;
+package fact.it.ratingservice;
 
-import fact.it.inventoryservice.dto.InventoryResponse;
-import fact.it.inventoryservice.model.StockItem;
-import fact.it.inventoryservice.repository.InventoryRepository;
-import fact.it.inventoryservice.service.InventoryService;
+import fact.it.ratingservice.dto.RatingResponse;
+import fact.it.ratingservice.model.Rating;
+import fact.it.ratingservice.repository.RatingRepository;
+import fact.it.ratingservice.service.RatingService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -17,9 +17,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class InventoryServiceUnitTests {
+public class RatingServiceUnitTests {
 
-    @InjectMocks
+    /*@InjectMocks
     private InventoryService inventoryService;
 
     @Mock
@@ -46,5 +46,5 @@ public class InventoryServiceUnitTests {
         assertEquals(false, inventoryResponses.get(1).isInStock());
 
         verify(inventoryRepository, times(1)).findBySkuCodeIn(skuCodes);
-    }
+    }*/
 }
