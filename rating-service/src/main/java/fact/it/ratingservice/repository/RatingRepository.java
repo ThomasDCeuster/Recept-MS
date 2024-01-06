@@ -12,6 +12,7 @@ import java.util.List;
 @Transactional
 public interface RatingRepository extends JpaRepository<Rating, Long> {
     List<Rating> findByIdIn(List<String> id);
+    List<Rating> findByNameIn(List<String> name);
 }
 
 

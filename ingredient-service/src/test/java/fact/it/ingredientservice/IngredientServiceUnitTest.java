@@ -27,22 +27,23 @@ public class IngredientServiceUnitTest {
     @Mock
     private IngredientRepository ingredientRepository;
 
-//    @Test
-//    public void testCreateProduct() {
-//        // Arrange
-//        ProductRequest productRequest = new ProductRequest();
-//        productRequest.setSkuCode("SKU123");
-//        productRequest.setName("Test Product");
-//        productRequest.setDescription("Test Description");
-//        productRequest.setPrice(BigDecimal.valueOf(100));
-//
-//        // Act
-//        productService.createProduct(productRequest);
-//
-//        // Assert
-//        verify(productRepository, times(1)).save(any(Product.class));
-//    }
-//
+    @Test
+    public void testCreateIngredient() {
+        // Arrange
+        IngredientRequest ingredientRequest = new IngredientRequest();
+        ingredientRequest.setName("Test Ingredient");
+        ingredientRequest.setDescription("Test Description");
+        ingredientRequest.setMeasurementUnit("liter")
+        ingredientRequest.setPrice(BigDecimal.valueOf(5));
+        ingredientRequest.setAmount(5)
+
+        // Act
+        ingredientService.createIngredient(ingredientRequest);
+
+        // Assert
+        verify(ingredientRepository, times(1)).save(any(Ingredient.class));
+    }
+
 //    @Test
 //    public void testGetAllProducts() {
 //        // Arrange

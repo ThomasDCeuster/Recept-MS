@@ -1,5 +1,6 @@
 package fact.it.recipeservice.controller;
 
+import fact.it.recipeservice.dto.RecipeRequest;
 import fact.it.recipeservice.dto.RecipeResponse;
 import fact.it.recipeservice.service.RecipeService;
 import lombok.RequiredArgsConstructor;
@@ -15,16 +16,16 @@ public class RecipeController {
 
     private final RecipeService recipeService;
 
-//    @PostMapping
-//    @ResponseStatus(HttpStatus.OK)
-//    public String placeOrder(@RequestBody OrderRequest orderRequest) {
-//        boolean result = orderService.placeOrder(orderRequest);
-//        return (result ? "Order placed successfully" : "Order placement failed");
-//    }
+    @PostMapping
+    @ResponseStatus(HttpStatus.OK)
+    public String createRecipe(@RequestBody RecipeRequest recipeRequest) {
+        boolean result = recipeService.createRecipe(recipeRequest);
+        return (result ? "Recipe created successfully" : "Recipe creation failed");
+    }
 
-//    @GetMapping
-//    @ResponseStatus(HttpStatus.OK)
-//    public List<RecipeResponse> getAllIngredients() {
-//        return recipeService.getAllRecipes();
-//    }
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<RecipeResponse> getAllIngredients() {
+        return recipeService.getAllRecipes();
+    }
 }

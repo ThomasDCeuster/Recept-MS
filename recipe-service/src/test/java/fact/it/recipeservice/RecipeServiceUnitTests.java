@@ -34,7 +34,7 @@ public class RecipeServiceUnitTests {
     @BeforeEach
     void setUp() {
         ReflectionTestUtils.setField(recipeService, "ingredientServiceBaseUrl", "http://localhost:8080");
-        ReflectionTestUtils.setField(recipeService, "inventoryServiceBaseUrl", "http://localhost:8082");
+        ReflectionTestUtils.setField(recipeService, "ratingServiceBaseUrl", "http://localhost:8082");
     }
 
 //    @Test

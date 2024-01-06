@@ -44,16 +44,16 @@ services:
    MONGODB_HOST: mongo-ingredients
 
  user-service:
-   depends_on:
-     - mongo-users
-   image: r0882755718/user-service
-   ports:
-     - 8083:8083
-   links:
-     - mongo-users
-   environment:
-     MONGODB_PORT: 27018
-     MONGODB_HOST: mongo-users
+  depends_on:
+    - mongo-users
+  image: r0882755718/user-service
+  ports:
+    - 8083:8083
+  links:
+    - mongo-users
+  environment:
+   MONGODB_PORT: 27018
+   MONGODB_HOST: mongo-users
    
  rating-service:
   depends_on:
@@ -108,5 +108,4 @@ volumes:
  mysql_rating_data:
  mongodb_ingredient_data:
  mongodb_user_data:
- mysql_inventory_data:
  mysql_recipe_data:
