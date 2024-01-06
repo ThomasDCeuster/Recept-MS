@@ -20,7 +20,7 @@ services:
   ports:
     - 3307:3306
   volumes:
-    - mysql_rating_data:/var/lib/mysql
+    - mysql_rating_data:/var/lib/mysql 
   environment:
    MYSQL_ROOT_PASSWORD: abc123
     
