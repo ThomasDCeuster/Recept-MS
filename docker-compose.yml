@@ -1,111 +1,88 @@
 services:
- mongo-ingredients:
+ mongo-products:
   image: mongo:latest
   ports:
     - 27017:27017
   volumes:
-    - mongodb_ingredient_data:/data/db
-
- mongo-users:
-   image: mongo:latest
-   ports:
-     - 27018:27017
-   volumes:
-     - mongodb_user_data:/data/db
+    - mongodb_product_data:/data/db
     
- mysql-recipe:
+ mysql-order:
   image: mysql:latest
   ports:
     - 3306:3306
   volumes:
-    - mysql_recipe_data:/var/lib/mysql
+    - mysql_order_data:/var/lib/mysql
   environment:
    MYSQL_ROOT_PASSWORD: abc123
     
- mysql-rating:
+ mysql-inventory:
   image: mysql:latest
   ports:
     - 3307:3306
   volumes:
-    - mysql_rating_data:/var/lib/mysql
+    - mysql_inventory_data:/var/lib/mysql
   environment:
    MYSQL_ROOT_PASSWORD: abc123
     
- ingredient-service:
+ product-service:
   depends_on:
-    - mongo-ingredients
-  image: unsecurytest/ingredient-service
+    - mongo-products
+  image: miverboven/product-service
   ports:
     - 8080:8080
   links:
-    - mongo-ingredients
+    - mongo-products
   environment:
    MONGODB_PORT: 27017
-   MONGODB_HOST: mongo-ingredients
-
- user-service:
-   depends_on:
-     - mongo-users
-   image: unsecurytest/user-service
-   ports:
-     - 8083:8083
-   links:
-     - mongo-users
-   environment:
-     MONGODB_PORT: 27018
-     MONGODB_HOST: mongo-users
+   MONGODB_HOST: mongo-products
    
- rating-service:
+ inventory-service:
   depends_on:
-    - mysql-rating
-  image: unsecurytest/rating-service
+    - mysql-inventory
+  image: miverboven/inventory-service
   ports:
     - 8082:8082
   links:
-    - mysql-rating
+    - mysql-inventory
   environment:
    MYSQL_DB_USERNAME: root
    MYSQL_DB_PASSWORD: abc123
-   MYSQL_DB_HOST: mysql-rating
+   MYSQL_DB_HOST: mysql-inventory
    MYSQL_DB_PORT: 3307
 
- recipe-service:
+ order-service:
   depends_on:
-    - ingredient-service
-    - user-service
-    - rating-service
-  image: unsecurytest/recipe-service
+    - product-service
+    - inventory-service
+  image: miverboven/order-service
   ports:
     - 8081:8081
   links:
-    - ingredient-service
-    - user-service
-    - rating-service
+    - product-service
+    - inventory-service
   environment:
-   INGREDIENT_SERVICE_BASEURL: ingredient-service:8080
-   USER_SERVICE_BASEURL: user-service:8083
-   RATING_SERVICE_BASEURL: rating-service:8082
+   PRODUCT_SERVICE_BASEURL: product-service:8080
+   INVENTORY_INFO_SERVICE_BASEURL: inventory-service:8082
    MYSQL_DB_USERNAME: root
    MYSQL_DB_PASSWORD: abc123
-   MYSQL_DB_HOST: mysql-recipe
+   MYSQL_DB_HOST: mysql-order
    MYSQL_DB_PORT: 3306
 
  api-gateway:
    depends_on:
-     - ingredient-service
-     - recipe-service
-   image: unsecurytest/api-gateway
+     - product-service
+     - order-service
+   image: miverboven/ede-api-gateway
    ports:
      - 8083:8083
    links:
-     - ingredient-service
-     - recipe-service
+     - product-service
+     - order-service
    environment:
-     INGREDIENT_SERVICE_BASEURL: ingredient-service:8080
-     RECIPE_SERVICE_BASEURL: recipe-service:8081
+     PRODUCT_SERVICE_BASEURL: product-service:8080
+     ORDER_SERVICE_BASEURL: order-service:8081
 
 volumes:
- mongodb_ingredient_data:
- mongodb_user_data:
- mysql_rating_data:
- mysql_recipe_data:
+ mongodb_product_data:
+ mysql_inventory_data:
+ mysql_order_data:
