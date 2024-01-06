@@ -18,8 +18,8 @@ public class SecurityConfig {
         serverHttpSecurity
                 .authorizeExchange(exchange ->
                         exchange.pathMatchers(HttpMethod.GET,"/recipes")
-                                .permitAll()
-                                .anyExchange()
+                                //.permitAll()
+                                //.anyExchange()
                                 .authenticated()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2
