@@ -82,18 +82,18 @@ public class IngredientServiceUnitTest {
         ingredient.setPrice(BigDecimal.valueOf(5));
         ingredient.setAmount(1.0);
 
-        when(ingredientRepository.findByIdIn(Arrays.asList("1"))).thenReturn(Arrays.asList(ingredient));
+        when(ingredientRepository.findByIdIn("1")).thenReturn(Arrays.asList(ingredient));
 
         // Act
-        IngredientResponse ingredientResponse = ingredientService.getIngredientById("1");
+        List<IngredientResponse> ingredients = ingredientService.getIngredientById("1");
 
         // Assert
-        assertNotNull(ingredientResponse);
-        assertEquals("Test Ingredient", ingredientResponse.getName());
-        assertEquals("Test Description", ingredientResponse.getDescription());
-        assertEquals("liter", ingredientResponse.getMeasurementUnit());
-        assertEquals(BigDecimal.valueOf(5), ingredientResponse.getPrice());
-        assertEquals(1.0, ingredientResponse.getAmount());
+        assertEquals(1, ingredients.size());
+        assertEquals("Test Ingredient", ingredients.get(0).getName());
+        assertEquals("Test Description", ingredients.get(0).getDescription());
+        assertEquals("liter", ingredients.get(0).getMeasurementUnit());
+        assertEquals(BigDecimal.valueOf(5), ingredients.get(0).getPrice());
+        assertEquals(1.0, ingredients.get(0).getAmount());
 
         verify(ingredientRepository, times(1)).findByIdIn(Arrays.asList(ingredient.getId()));
     }
