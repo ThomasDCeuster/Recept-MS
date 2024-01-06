@@ -5,8 +5,8 @@
       <module fileurl="file://$PROJECT_DIR$/api-gateway/api-gateway.iml" filepath="$PROJECT_DIR$/api-gateway/api-gateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/product-service/ingredient-service.iml" filepath="$PROJECT_DIR$/product-service/ingredient-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/inventory-service/inventory-service.iml" filepath="$PROJECT_DIR$/inventory-service/inventory-service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/order-service/order-service.iml" filepath="$PROJECT_DIR$/order-service/order-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/recipe-microservices.iml" filepath="$PROJECT_DIR$/.idea/recipe-microservices.iml" />
+      <module fileurl="file://$PROJECT_DIR$/order-service/recipe-service.iml" filepath="$PROJECT_DIR$/order-service/recipe-service.iml" />
     </modules>
   </component>
 </project>

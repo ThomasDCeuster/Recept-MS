@@ -39,9 +39,9 @@ spring:
             - Method=GET
           filters:
             - SetPath=/api/ingredient/all
-        - id: order-service
-          uri: http://${ORDER_SERVICE_BASEURL:localhost:8081}
+        - id: recipe-service
+          uri: http://${RECIPE_SERVICE_BASEURL:localhost:8081}
           predicates:
-            - Path=/orders
+            - Path=/recipes
           filters:
-            - SetPath=/api/order
+            - SetPath=/api/recipe
