@@ -1,9 +1,9 @@
-package fact.it.inventoryservice;
+package fact.it.ratingservice;
 
-import fact.it.inventoryservice.dto.InventoryResponse;
-import fact.it.inventoryservice.model.StockItem;
-import fact.it.inventoryservice.repository.InventoryRepository;
-import fact.it.inventoryservice.service.InventoryService;
+import fact.it.ratingservice.dto.RatingResponse;
+import fact.it.ratingservice.model.Rating;
+import fact.it.ratingservice.repository.Rato,gRepository;
+import fact.it.ratingservice.service.RatingService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
