@@ -1,5 +1,6 @@
 package fact.it.ratingservice.service;
 
+import fact.it.ratingservice.dto.*;
 import fact.it.ratingservice.repository.RatingRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;

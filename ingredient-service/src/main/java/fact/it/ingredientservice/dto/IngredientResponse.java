@@ -17,5 +17,5 @@ public class IngredientResponse {
     private String description;
     private String measurementUnit;
     private BigDecimal price;
-    private String amount;
+    private Double amount;
 }
