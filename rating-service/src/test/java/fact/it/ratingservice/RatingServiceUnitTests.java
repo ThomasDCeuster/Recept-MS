@@ -2,7 +2,7 @@ package fact.it.ratingservice;
 
 import fact.it.ratingservice.dto.RatingResponse;
 import fact.it.ratingservice.model.Rating;
-import fact.it.ratingservice.repository.Rato,gRepository;
+import fact.it.ratingservice.repository.RatingRepository;
 import fact.it.ratingservice.service.RatingService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
