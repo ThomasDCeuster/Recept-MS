@@ -36,7 +36,7 @@ public class RatingServiceUnitTests {
         when(ratingRepository.findByNameIn("Test")).thenReturn(Arrays.asList(rating));
 
         // Act
-        List<RatingResponse> ratings = ratingService.getIngredientByName("Test");
+        List<RatingResponse> ratings = ratingService.getRatingByName("Test");
 
         // Assert
         assertEquals(1, ratings.size());
