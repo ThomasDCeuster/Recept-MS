@@ -1,4 +1,4 @@
-package fact.it.recipeservice.dto;
+package fact.it.userservice.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,10 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class InventoryResponse {
-    private String skuCode;
-    private boolean isInStock;
+public class UserRequest {
+    private String id;
+    private String username;
 }

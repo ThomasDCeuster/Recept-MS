@@ -1,4 +1,4 @@
-package fact.it.ingredientservice.model;
+package fact.it.userservice.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,17 +8,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.math.BigDecimal;
 
 
-@Document(value = "ingredient")
+@Document(value = "user")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Data
-public class Ingredient {
+public class User {
     private String id;
-    private String name;
-    private String description;
-    private String measurementUnit;
-    private BigDecimal price;
-    private Double amount;
-
+    private String username;
 }

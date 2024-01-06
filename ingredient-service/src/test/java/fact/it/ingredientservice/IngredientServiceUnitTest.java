@@ -22,75 +22,79 @@ import static org.mockito.Mockito.*;
 public class IngredientServiceUnitTest {
 
     @InjectMocks
-    private IngredientService IngredientService;
+    private IngredientService ingredientService;
 
     @Mock
     private IngredientRepository ingredientRepository;
 
-//    @Test
-//    public void testCreateProduct() {
-//        // Arrange
-//        ProductRequest productRequest = new ProductRequest();
-//        productRequest.setSkuCode("SKU123");
-//        productRequest.setName("Test Product");
-//        productRequest.setDescription("Test Description");
-//        productRequest.setPrice(BigDecimal.valueOf(100));
-//
-//        // Act
-//        productService.createProduct(productRequest);
-//
-//        // Assert
-//        verify(productRepository, times(1)).save(any(Product.class));
-//    }
-//
-//    @Test
-//    public void testGetAllProducts() {
-//        // Arrange
-//        Product product = new Product();
-//        product.setId("1");
-//        product.setSkuCode("SKU123");
-//        product.setName("Test Product");
-//        product.setDescription("Test Description");
-//        product.setPrice(BigDecimal.valueOf(100));
-//
-//        when(productRepository.findAll()).thenReturn(Arrays.asList(product));
-//
-//        // Act
-//        List<ProductResponse> products = productService.getAllProducts();
-//
-//        // Assert
-//        assertEquals(1, products.size());
-//        assertEquals("SKU123", products.get(0).getSkuCode());
-//        assertEquals("Test Product", products.get(0).getName());
-//        assertEquals("Test Description", products.get(0).getDescription());
-//        assertEquals(BigDecimal.valueOf(100), products.get(0).getPrice());
-//
-//        verify(productRepository, times(1)).findAll();
-//    }
-//
-//    @Test
-//    public void testGetAllProductsBySkuCode() {
-//        // Arrange
-//        Product product = new Product();
-//        product.setId("1");
-//        product.setSkuCode("SKU123");
-//        product.setName("Test Product");
-//        product.setDescription("Test Description");
-//        product.setPrice(BigDecimal.valueOf(100));
-//
-//        when(productRepository.findBySkuCodeIn(Arrays.asList("SKU123"))).thenReturn(Arrays.asList(product));
-//
-//        // Act
-//        List<ProductResponse> products = productService.getAllProductsBySkuCode(Arrays.asList("SKU123"));
-//
-//        // Assert
-//        assertEquals(1, products.size());
-//        assertEquals("1", products.get(0).getId());
-//        assertEquals("SKU123", products.get(0).getSkuCode());
-//        assertEquals("Test Product", products.get(0).getName());
-//        assertEquals("Test Description", products.get(0).getDescription());
-//        assertEquals(BigDecimal.valueOf(100), products.get(0).getPrice());
-//
-//        verify(productRepository, times(1)).findBySkuCodeIn(Arrays.asList(product.getSkuCode()));
-//    }
+    @Test
+    public void testCreateIngredient() {
+        // Arrange
+        IngredientRequest ingredientRequest = new IngredientRequest();
+        ingredientRequest.setName("Test Ingredient");
+        ingredientRequest.setDescription("Test Description");
+        ingredientRequest.setMeasurementUnit("liter");
+        ingredientRequest.setPrice(BigDecimal.valueOf(5));
+        ingredientRequest.setAmount(1.0);
+
+        // Act
+        ingredientService.createIngredient(ingredientRequest);
+
+        // Assert
+        verify(ingredientRepository, times(1)).save(any(Ingredient.class));
+    }
+
+    @Test
+    public void testGetAllIngredients() {
+        // Arrange
+        Ingredient ingredient = new Ingredient();
+        ingredient.setId("1");
+        ingredient.setName("Test Ingredient");
+        ingredient.setDescription("Test Description");
+        ingredient.setMeasurementUnit("liter");
+        ingredient.setPrice(BigDecimal.valueOf(5));
+        ingredient.setAmount(1.0);
+
+        when(ingredientRepository.findAll()).thenReturn(Arrays.asList(ingredient));
+
+        // Act
+        List<IngredientResponse> ingredients = ingredientService.getAllIngredients();
+
+        // Assert
+        assertEquals(1, ingredients.size());
+        assertEquals("Test Ingredient", ingredients.get(0).getName());
+        assertEquals("Test Description", ingredients.get(0).getDescription());
+        assertEquals("liter", ingredients.get(0).getMeasurementUnit());
+        assertEquals(BigDecimal.valueOf(5), ingredients.get(0).getPrice());
+        assertEquals(1.0, ingredients.get(0).getAmount());
+
+        verify(ingredientRepository, times(1)).findAll();
+    }
+
+    @Test
+    public void testGetIngredientsById() {
+        // Arrange
+        Ingredient ingredient = new Ingredient();
+        ingredient.setId("1");
+        ingredient.setName("Test Ingredient");
+        ingredient.setDescription("Test Description");
+        ingredient.setMeasurementUnit("liter");
+        ingredient.setPrice(BigDecimal.valueOf(5));
+        ingredient.setAmount(1.0);
+
+        when(ingredientRepository.findByIdIn("1")).thenReturn(Arrays.asList(ingredient));
+
+        // Act
+        List<IngredientResponse> ingredients = ingredientService.getIngredientById("1");
+
+        // Assert
+        assertEquals(1, ingredients.size());
+        assertEquals("Test Ingredient", ingredients.get(0).getName());
+        assertEquals("Test Description", ingredients.get(0).getDescription());
+        assertEquals("liter", ingredients.get(0).getMeasurementUnit());
+        assertEquals(BigDecimal.valueOf(5), ingredients.get(0).getPrice());
+        assertEquals(1.0, ingredients.get(0).getAmount());
+
+        verify(ingredientRepository, times(1)).findByIdIn(ingredient.getId());
+    }
 }
