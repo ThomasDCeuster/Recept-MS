@@ -95,6 +95,6 @@ public class IngredientServiceUnitTest {
         assertEquals(BigDecimal.valueOf(5), ingredients.get(0).getPrice());
         assertEquals(1.0, ingredients.get(0).getAmount());
 
-        verify(ingredientRepository, times(1)).findByIdIn(Arrays.asList(ingredient.getId()));
+        verify(ingredientRepository, times(1)).findByIdIn(ingredient.getId());
     }
 }
