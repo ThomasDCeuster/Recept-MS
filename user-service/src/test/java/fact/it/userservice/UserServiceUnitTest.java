@@ -1,10 +1,10 @@
-package fact.it.ingredientservice;
+package fact.it.userservice;
 
-import fact.it.ingredientservice.dto.IngredientRequest;
-import fact.it.ingredientservice.dto.IngredientResponse;
-import fact.it.ingredientservice.model.Ingredient;
-import fact.it.ingredientservice.repository.IngredientRepository;
-import fact.it.ingredientservice.service.IngredientService;
+import fact.it.userservice.dto.UserRequest;
+import fact.it.userservice.dto.UserResponse;
+import fact.it.userservice.model.User;
+import fact.it.userservice.repository.UserRepository;
+import fact.it.userservice.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -19,13 +19,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class IngredientServiceUnitTest {
+public class UserServiceUnitTest {
 
     @InjectMocks
-    private IngredientService ingredientService;
+    private UserService userService;
 
     @Mock
-    private IngredientRepository ingredientRepository;
+    private UserRepository userRepository;
 
 //    @Test
 //    public void testCreateProduct() {

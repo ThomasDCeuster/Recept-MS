@@ -5,6 +5,13 @@ services:
     - 27017:27017
   volumes:
     - mongodb_ingredient_data:/data/db
+
+ mongo-users:
+   image: mongo:latest
+   ports:
+     - 27018:27017
+   volumes:
+     - mongodb_users_data:/data/db
     
  mysql-recipe:
   image: mysql:latest
@@ -35,7 +42,19 @@ services:
   environment:
    MONGODB_PORT: 27017
    MONGODB_HOST: mongo-ingredients
-   
+
+ user-service:
+   depends_on:
+     - mongo-users
+   image: r0882755718/user-service
+   ports:
+     - 8083:8083
+   links:
+     - mongo-users
+   environment:
+     MONGODB_PORT: 27018
+     MONGODB_HOST: mongo-users
+
  inventory-service:
   depends_on:
     - mysql-inventory
@@ -54,15 +73,18 @@ services:
   depends_on:
     - ingredient-service
     - inventory-service
+    - user-service
   image: r0882755718/recipe-service
   ports:
     - 8081:8081
   links:
     - ingredient-service
     - inventory-service
+    - user-service
   environment:
    INGREDIENT_SERVICE_BASEURL: ingredient-service:8080
    INVENTORY_INFO_SERVICE_BASEURL: inventory-service:8082
+   USER_SERVICE_BASEURL: user-service:8083
    MYSQL_DB_USERNAME: root
    MYSQL_DB_PASSWORD: abc123
    MYSQL_DB_HOST: mysql-recipe
@@ -74,7 +96,7 @@ services:
      - recipe-service
    image: miverboven/ede-api-gateway
    ports:
-     - 8083:8083
+     - 8084:8084
    links:
      - ingredient-service
      - recipe-service
@@ -84,5 +106,6 @@ services:
 
 volumes:
  mongodb_ingredient_data:
+ mongodb_user_data:
  mysql_inventory_data:
  mysql_recipe_data:
