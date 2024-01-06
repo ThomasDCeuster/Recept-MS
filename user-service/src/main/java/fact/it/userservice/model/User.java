@@ -9,11 +9,12 @@ import lombok.Setter;
 import java.util.List;
 
 
-@Document(value = "user")
-@AllArgsConstructor
+@Entity
+@Table(name = "users")
+@Getter
+@Setter
 @NoArgsConstructor
-@Builder
-@Data
+@AllArgsConstructor
 public class User {
     private String id;
     private String username;
