@@ -86,9 +86,24 @@ public class RecipeService {
         return recipes.stream()
                 .map(recipe -> new RecipeResponse(
                         recipe.getRecipeNumber(),
+                        recipe.getName(),
                         mapToRecipeLineItemsDto(recipe.getRecipeLineItemsList())
                 ))
                 .collect(Collectors.toList());
+    }
+
+    public List<RecipeResponse> getRecipeByName(String name) {
+        List<Recipe> recipes = recipeRepository.findByNameIn(name);
+
+        return recipes.stream().map(this::mapToRecipeResponse).toList();
+    }
+
+    private RecipeResponse mapToRecipeResponse(Recipe recipe) {
+        return RecipeResponse.builder()
+                .recipeNumber(recipe.getRecipeNumber())
+                .name(recipe.getName())
+                .recipeLineItemsList(mapToRecipeLineItemsDto(recipe.getRecipeLineItemsList()))
+                .build();
     }
 
     private RecipeLineItem mapToRecipeLineItem(RecipeLineItemDto recipeLineItemDto) {
