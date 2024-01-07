@@ -127,4 +127,8 @@ public class IngredientService {
         return ingredients.stream().map(this::mapToIngredientResponse).toList();
     }
 
+    public void deleteIngredient(String id) {
+        ingredientRepository.deleteById(id);
+    }
+
 }

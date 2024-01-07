@@ -34,4 +34,15 @@ public class IngredientController {
     public List<IngredientResponse> getAllIngredients() {
         return ingredientService.getAllIngredients();
     }
+
+    @DeleteMapping
+    @ResponseStatus(HttpStatus.OK)
+    public String deleteIngredient(@RequestParam String id) {
+        try {
+            ingredientService.deleteIngredient(id);
+            return "Ingredient deleted successfully";
+        } catch (Exception e) {
+            return "Ingredient deletion failed: " + e.getMessage();
+        }
+    }
 }
