@@ -7,7 +7,7 @@ logging:
     org.springframework.cloud.gateway: INFO
     org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator: INFO
     reactor.netty: INFO
-    org.springframework.security: TRACE
+    org.springframework.security: DEBUG
 
 spring:
   security:
