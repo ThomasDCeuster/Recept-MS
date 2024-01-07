@@ -1,4 +1,5 @@
 package fact.it.apigateway.config;
+/*
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -26,3 +27,4 @@ public class SecurityConfig {
         return serverHttpSecurity.build();
     }
 }
+*/
