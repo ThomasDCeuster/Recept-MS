@@ -71,6 +71,7 @@ public class RecipeService {
             recipeLineItem6.setUnit("g");
             recipe2.setRecipeLineItemsList(List.of(recipeLineItem4, recipeLineItem5, recipeLineItem6));
             recipeRepository.save(recipe2);
+            
         }
     }
 
