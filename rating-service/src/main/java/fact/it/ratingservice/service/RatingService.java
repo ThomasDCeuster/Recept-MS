@@ -34,7 +34,7 @@ public class RatingService {
     }
 
     public List<RatingResponse> getRatingByName(String name) {
-        List<Rating> ratings = ratingRepository.findByNameIn(Arrays.asList(name));
+        List<Rating> ratings = ratingRepository.findByNameIn(name);
 
         return ratings.stream().map(this::mapToRatingResponse).toList();
     }
