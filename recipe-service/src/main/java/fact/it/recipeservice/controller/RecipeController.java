@@ -31,14 +31,14 @@ public class RecipeController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public String updateRecipe(@PathVariable Long id, @RequestBody RecipeRequest updatedRecipe) {
+    public String updateRecipe(@PathVariable String id, @RequestBody RecipeRequest updatedRecipe) {
         boolean result = recipeService.updateRecipe(id, updatedRecipe);
         return (result ? "Recipe updated successfully" : "Recipe update failed");
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public String deleteRecipe(@PathVariable Long id) {
+    public String deleteRecipe(@PathVariable String id) {
         try {
             recipeService.deleteRecipe(id);
             return "Recipe deleted successfully";

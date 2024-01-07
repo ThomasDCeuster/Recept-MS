@@ -168,14 +168,14 @@ public class RecipeService {
                 .collect(Collectors.toList());
     }
 
-    public void deleteRecipe(Long id) {
+    public void deleteRecipe(String id) {
         recipeRepository.findById(id)
                 .orElseThrow(() -> new RecipeNotFoundException("Recipe not found with id: " + id));
 
         recipeRepository.deleteById(id);
     }
 
-    public boolean updateRecipe(Long id, RecipeRequest updatedRecipe) {
+    public boolean updateRecipe(String id, RecipeRequest updatedRecipe) {
         Recipe existingRecipe = recipeRepository.findById(id)
                 .orElseThrow(() -> new RecipeNotFoundException("Recipe not found with id: " + id));
 
