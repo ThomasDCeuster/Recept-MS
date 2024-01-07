@@ -18,9 +18,13 @@ public class SecurityConfig {
         serverHttpSecurity
                 .authorizeExchange(exchange ->
                         exchange.pathMatchers(HttpMethod.GET,"/recipes")
-                                .permitAll()
-                                .anyExchange()
-                                .authenticated()
+                                .permitAll().anyExchange().authenticated()
+                                .pathMatchers(HttpMethod.POST,"/recipes").authenticated()
+                                .pathMatchers(HttpMethod.PUT,"/recipes/**").authenticated()
+                                .pathMatchers(HttpMethod.DELETE,"/recipes/**").authenticated()
+                                .pathMatchers(HttpMethod.GET,"/ingredients").permitAll()
+                                .pathMatchers(HttpMethod.GET,"/ratings").permitAll()
+                                .pathMatchers(HttpMethod.GET,"/users").permitAll()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(withDefaults())
