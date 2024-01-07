@@ -17,5 +17,5 @@ public class IngredientRequest {
     private String description;
     private String measurementUnit;
     private BigDecimal price;
-    private Double amount;
+    private Integer amount;
 }

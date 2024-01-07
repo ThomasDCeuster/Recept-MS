@@ -33,7 +33,7 @@ public class RatingService {
     }
 
     public List<RatingResponse> getRatingByName(String name) {
-        List<Rating> ratings = ratingRepository.findByNameIn(name);
+        List<Rating> ratings = ratingRepository.findByNameIn(List.of(name));
 
         return ratings.stream().map(this::mapToRatingResponse).toList();
     }

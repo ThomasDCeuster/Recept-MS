@@ -20,6 +20,7 @@ public class Recipe {
     private Long id;
     private String recipeNumber;
     private String name;
+
     @OneToMany(cascade = CascadeType.ALL)
     private List<RecipeLineItem> recipeLineItemsList;
 }

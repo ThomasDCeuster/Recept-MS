@@ -33,6 +33,14 @@ spring:
           filters:
             - SetPath=/api/ingredient
 
+        - id: ingredient-service-all
+          uri: http://${INGREDIENT_SERVICE_BASEURL:localhost:8080}
+          predicates:
+            - Path=/ingredients/all
+            - Method=GET
+          filters:
+            - SetPath=/api/ingredient/all
+
         - id: user-service
           uri: http://${USER_SERVICE_BASEURL:localhost:8083}
           predicates:
@@ -41,10 +49,10 @@ spring:
           filters:
             - SetPath=/api/user
 
-        - id: user-service
+        - id: user-service-all
           uri: http://${USER_SERVICE_BASEURL:localhost:8083}
           predicates:
-            - Path=/users
+            - Path=/users/all
             - Method=GET
           filters:
             - SetPath=/api/user/all
@@ -57,6 +65,14 @@ spring:
           filters:
             - SetPath=/api/rating
 
+        - id: rating-service-all
+          uri: http://${RATING_SERVICE_BASEURL:localhost:8082}
+          predicates:
+            - Path=/ratings/all
+            - Method=GET
+          filters:
+            - SetPath=/api/rating/all
+
         - id: recipe-service
           uri: http://${RECIPE_SERVICE_BASEURL:localhost:8081}
           predicates:
@@ -68,7 +84,7 @@ spring:
         - id: recipe-service-all
           uri: http://${RECIPE_SERVICE_BASEURL:localhost:8081}
           predicates:
-            - Path=/recipes
+            - Path=/recipes/all
             - Method=GET
           filters:
             - SetPath=/api/recipe/all
@@ -79,7 +95,7 @@ spring:
             - Path=/recipes
             - Method=POST
           filters:
-            - SetPath=/api/recipe/create
+            - SetPath=/api/recipe
 
         - id: recipe-service-edit
           uri: http://${RECIPE_SERVICE_BASEURL:localhost:8081}
@@ -87,7 +103,7 @@ spring:
             - Path=/recipes
             - Method=PUT
           filters:
-            - SetPath=/api/recipe/edit
+            - SetPath=/api/recipe
 
         - id: recipe-service-delete
           uri: http://${RECIPE_SERVICE_BASEURL:localhost:8081}
@@ -95,4 +111,4 @@ spring:
             - Path=/recipes
             - Method=DELETE
           filters:
-            - SetPath=/api/recipe/delete
+            - SetPath=/api/recipe
