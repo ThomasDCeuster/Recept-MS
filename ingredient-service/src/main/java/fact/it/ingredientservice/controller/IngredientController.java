@@ -1,8 +1,7 @@
 package fact.it.ingredientservice.controller;
 
-import fact.it.ingredientservice.dto.IngredientRequest;
+import fact.it.ingredientservice.dto.*;
 import fact.it.ingredientservice.service.IngredientService;
-import fact.it.ingredientservice.dto.IngredientResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
