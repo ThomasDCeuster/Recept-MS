@@ -5,8 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface RatingRepository extends JpaRepository<Rating, Long> {
-    List<Rating> findByIdIn(List<String> id);
+public interface RatingRepository extends JpaRepository<Rating, String> {
     List<Rating> findByNameIn(List<String> names);
 }
 
