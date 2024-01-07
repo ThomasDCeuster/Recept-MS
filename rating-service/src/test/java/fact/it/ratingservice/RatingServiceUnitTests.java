@@ -33,7 +33,7 @@ public class RatingServiceUnitTests {
         rating.setName("Test Rating");
         rating.setRating(4.5);
 
-        when(ratingRepository.findByNameIn("Test Rating")).thenReturn(Arrays.asList(rating));
+        when(ratingRepository.findByNameIn(List.of("Test Rating"))).thenReturn(Arrays.asList(rating));
 
         // Act
         List<RatingResponse> ratings = ratingService.getRatingByName("Test Rating");
@@ -43,6 +43,6 @@ public class RatingServiceUnitTests {
         assertEquals("Test Rating", ratings.get(0).getName());
         assertEquals(4.5, ratings.get(0).getRating());
 
-        verify(ratingRepository, times(1)).findByNameIn(rating.getName());
+        verify(ratingRepository, times(1)).findByNameIn(List.of(rating.getName()));
     }
 }
