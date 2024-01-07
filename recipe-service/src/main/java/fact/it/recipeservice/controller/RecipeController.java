@@ -23,9 +23,9 @@ public class RecipeController {
         return (result ? "Recipe created successfully" : "Recipe creation failed");
     }
 
-    @GetMapping
+    @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
-    public List<RecipeResponse> getAllIngredients() {
+    public List<RecipeResponse> getAllRecipes() {
         return recipeService.getAllRecipes();
     }
 }
