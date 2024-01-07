@@ -76,6 +76,8 @@ public class RecipeService {
     }
 
     public boolean createRecipe(RecipeRequest recipeRequest) {
+        System.out.println("Creating recipe");
+        System.out.println("request: " + recipeRequest);
         Recipe recipe = new Recipe();
         recipe.setRecipeNumber(UUID.randomUUID().toString());
         recipe.setName(recipeRequest.getName());
