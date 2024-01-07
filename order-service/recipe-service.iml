@@ -157,12 +157,5 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-jcl:6.0.11" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework:spring-test:6.0.11" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.xmlunit:xmlunit-core:2.9.1" level="project" />
-    <orderEntry type="module" module-name="ingredient-service" />
-    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-data-mongodb:3.1.3" level="project" />
-    <orderEntry type="library" name="Maven: org.mongodb:mongodb-driver-sync:4.9.1" level="project" />
-    <orderEntry type="library" name="Maven: org.mongodb:bson:4.9.1" level="project" />
-    <orderEntry type="library" name="Maven: org.mongodb:mongodb-driver-core:4.9.1" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: org.mongodb:bson-record-codec:4.9.1" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.data:spring-data-mongodb:4.1.3" level="project" />
   </component>
 </module>

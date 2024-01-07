@@ -76,7 +76,7 @@ public class RecipeService {
     }
 
     public boolean createRecipe(RecipeRequest recipeRequest) {
-        Recipe recipe = new Recipe();
+        /*Recipe recipe = new Recipe();
         recipe.setRecipeNumber(UUID.randomUUID().toString());
 
         List<RecipeLineItem> recipeLineItems = recipeRequest.getRecipeLineItemsDtoList()
@@ -119,6 +119,18 @@ public class RecipeService {
                 })
                 .collect(Collectors.toList());
 
+        recipeRepository.save(recipe);
+        return true;*/
+
+
+        Recipe recipe = new Recipe();
+        recipe.setRecipeNumber(UUID.randomUUID().toString());
+        List<RecipeLineItem> recipeLineItems = recipeRequest.getRecipeLineItemsDtoList()
+                .stream()
+                .map(this::mapToRecipeLineItem)
+                .collect(Collectors.toList());
+
+        recipe.setRecipeLineItemsList(recipeLineItems);
         recipeRepository.save(recipe);
         return true;
     }
