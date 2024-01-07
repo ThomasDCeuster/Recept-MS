@@ -28,6 +28,7 @@ public class IngredientController {
     public List<IngredientResponse> getIngredientById(@RequestParam String id) {
         return ingredientService.getIngredientById(id);
     }
+
     @CrossOrigin(origins = "https://659b0868480483cbb0fabc9e--magnificent-caramel-73ce1b.netlify.app/")
     @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
