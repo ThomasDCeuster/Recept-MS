@@ -19,12 +19,12 @@ public class SecurityConfig {
                 .authorizeExchange(exchange ->
                         exchange.pathMatchers(HttpMethod.GET,"/recipes")
                                 .permitAll().anyExchange().authenticated()
-                                .pathMatchers(HttpMethod.GET,"/ingredients")
+                                /*.pathMatchers(HttpMethod.GET,"/ingredients")
                                 .permitAll().anyExchange().authenticated()
                                 .pathMatchers(HttpMethod.GET,"/users")
                                 .permitAll().anyExchange().authenticated()
                                 .pathMatchers(HttpMethod.GET,"/ratings")
-                                .permitAll().anyExchange().authenticated()
+                                .permitAll().anyExchange().authenticated()*/
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(withDefaults())
