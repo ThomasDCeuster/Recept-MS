@@ -25,14 +25,6 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: ingredient-service
-          uri: http://${INGREDIENT_SERVICE_BASEURL:localhost:8080}
-          predicates:
-            - Path=/ingredients
-            - Method=POST
-          filters:
-            - SetPath=/api/ingredient
-
         - id: ingredient-service-all
           uri: http://${INGREDIENT_SERVICE_BASEURL:localhost:8080}
           predicates:
@@ -41,17 +33,11 @@ spring:
           filters:
             - SetPath=/api/ingredient/all
 
-        - id: recipe-service
-          uri: http://${RECIPE_SERVICE_BASEURL:localhost:8081}
-          predicates:
-            - Path=/recipes
-          filters:
-            - SetPath=/api/recipe
-
         - id: user-service
           uri: http://${USER_SERVICE_BASEURL:localhost:8083}
           predicates:
             - Path=/users
+            - Method=GET
           filters:
             - SetPath=/api/user
 
@@ -59,5 +45,46 @@ spring:
           uri: http://${RATING_SERVICE_BASEURL:localhost:8082}
           predicates:
             - Path=/ratings
+            - Method=GET
           filters:
             - SetPath=/api/rating
+
+        - id: recipe-service
+          uri: http://${RECIPE_SERVICE_BASEURL:localhost:8081}
+          predicates:
+            - Path=/recipes
+            - Method=GET
+          filters:
+            - SetPath=/api/recipe
+
+        - id: recipe-service-all
+          uri: http://${RECIPE_SERVICE_BASEURL:localhost:8081}
+          predicates:
+            - Path=/recipes
+            - Method=GET
+          filters:
+            - SetPath=/api/recipe/all
+
+        - id: recipe-service-create
+          uri: http://${RECIPE_SERVICE_BASEURL:localhost:8081}
+          predicates:
+            - Path=/recipes
+            - Method=POST
+          filters:
+            - SetPath=/api/recipe/create
+
+        - id: recipe-service-edit
+          uri: http://${RECIPE_SERVICE_BASEURL:localhost:8081}
+          predicates:
+            - Path=/recipes
+            - Method=PUT
+          filters:
+            - SetPath=/api/recipe/edit
+
+        - id: recipe-service-delete
+          uri: http://${RECIPE_SERVICE_BASEURL:localhost:8081}
+          predicates:
+            - Path=/recipes
+            - Method=DELETE
+          filters:
+            - SetPath=/api/recipe/delete
