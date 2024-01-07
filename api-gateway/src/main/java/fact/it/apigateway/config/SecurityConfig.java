@@ -18,8 +18,7 @@ public class SecurityConfig {
         serverHttpSecurity
                 .authorizeExchange(exchange ->
                         exchange
-                                .pathMatchers("/**").permitAll() // Allow all paths without authentication (for testing)
-                                .anyExchange().authenticated()
+                                .anyExchange().permitAll()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(withDefaults())
