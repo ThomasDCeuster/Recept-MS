@@ -7,5 +7,5 @@ import java.util.Collection;
 import java.util.List;
 
 public interface RecipeRepository extends JpaRepository<Recipe, Long> {
-    List<Recipe> findByNameIn(String name);
+    List<Recipe> findByName(String name);
 }

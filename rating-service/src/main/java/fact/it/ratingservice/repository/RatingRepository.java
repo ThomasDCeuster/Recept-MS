@@ -7,5 +7,5 @@ import java.util.Collection;
 import java.util.List;
 
 public interface RatingRepository extends JpaRepository<Rating, Long> {
-    List<Rating> findByNameIn(String names);
+    List<Rating> findByName(String names);
 }
