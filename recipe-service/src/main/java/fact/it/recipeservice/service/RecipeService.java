@@ -71,53 +71,20 @@ public class RecipeService {
             recipeLineItem6.setUnit("g");
             recipe2.setRecipeLineItemsList(List.of(recipeLineItem4, recipeLineItem5, recipeLineItem6));
             recipeRepository.save(recipe2);
+
         }
     }
 
     public boolean createRecipe(RecipeRequest recipeRequest) {
+        System.out.println("Creating recipe");
+        System.out.println("request: " + recipeRequest);
         Recipe recipe = new Recipe();
         recipe.setRecipeNumber(UUID.randomUUID().toString());
-
-        List<RecipeLineItem> recipeLineItems = Optional.ofNullable(recipeRequest.getRecipeLineItemsDtoList())
-                .orElse(Collections.emptyList())
+        recipe.setName(recipeRequest.getName());
+        recipe.setRecipeLineItemsList(recipeRequest.getRecipeLineItemsDtoList()
                 .stream()
                 .map(this::mapToRecipeLineItem)
-                .toList();
-
-        recipe.setRecipeLineItemsList(recipeLineItems);
-
-        List<String> names = recipe.getRecipeLineItemsList().stream()
-                .map(RecipeLineItem::getName)
-                .toList();
-
-        RatingResponse[] ratingResponseArray = webClient.get()
-                .uri("http://" + ratingServiceBaseUrl + "/api/rating",
-                        uriBuilder -> uriBuilder.queryParam("name", names).build())
-                .retrieve()
-                .bodyToMono(RatingResponse[].class)
-                .block();
-
-
-        IngredientResponse[] ingredientResponseArray = webClient.get()
-                .uri("http://" + ingredientServiceBaseUrl + "/api/ingredient",
-                        uriBuilder -> uriBuilder.queryParam("name", names).build())
-                .retrieve()
-                .bodyToMono(IngredientResponse[].class)
-                .block();
-
-        recipe.getRecipeLineItemsList().stream()
-                .map(recipeItem -> {
-                    IngredientResponse ingredient = Arrays.stream(ingredientResponseArray)
-                            .filter(i -> i.getName().equals(recipeItem.getName()))
-                            .findFirst()
-                            .orElse(null);
-                    if (ingredient != null) {
-                        recipeItem.setQuantity(ingredient.getAmount());
-                        recipeItem.setUnit(ingredient.getMeasurementUnit());
-                    }
-                    return recipeItem;
-                })
-                .collect(Collectors.toList());
+                .toList());
 
         recipeRepository.save(recipe);
         return true;
@@ -173,25 +140,21 @@ public class RecipeService {
 
         recipeRepository.deleteById(id);
     }
+    
 
     public boolean updateRecipe(Long id, RecipeRequest updatedRecipe) {
-        Recipe existingRecipe = recipeRepository.findById(id)
+        System.out.println("updating recipe");
+        System.out.println("request: " + updatedRecipe);
+        Recipe recipe = recipeRepository.findById(id)
                 .orElseThrow(() -> new RecipeNotFoundException("Recipe not found with id: " + id));
 
-        // Update existing recipe with new data
-        existingRecipe.setName(updatedRecipe.getName());
-        existingRecipe.setRecipeNumber(updatedRecipe.getRecipeNumber());
-
-        // Update recipe line items if needed (example: assuming they are a list of RecipeLineItemDto)
-        List<RecipeLineItem> updatedRecipeLineItems = updatedRecipe.getRecipeLineItemsDtoList()
+        recipe.setName(updatedRecipe.getName());
+        recipe.setRecipeLineItemsList(updatedRecipe.getRecipeLineItemsDtoList()
                 .stream()
                 .map(this::mapToRecipeLineItem)
-                .toList();
-        existingRecipe.setRecipeLineItemsList(updatedRecipeLineItems);
+                .toList());
 
-        // Save the updated recipe
-        recipeRepository.save(existingRecipe);
-
+        recipeRepository.save(recipe);
         return true;
     }
 }

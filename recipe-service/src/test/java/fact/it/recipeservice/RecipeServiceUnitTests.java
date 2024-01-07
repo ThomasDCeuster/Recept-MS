@@ -58,54 +58,20 @@ public class RecipeServiceUnitTests {
     @Test
     public void testCreateRecipe_Success() {
         // Arrange
-        String recipeNumber = "1";
-        String name = "Test Name";
-
         RecipeRequest recipeRequest = new RecipeRequest();
-        // populate recipeRequest with test data
-        RecipeLineItemDto recipeLineItemDto = new RecipeLineItemDto();
-        recipeLineItemDto.setId(1L);
-        recipeLineItemDto.setUnit("liter");
-        recipeLineItemDto.setName("Test Name");
-        recipeLineItemDto.setQuantity(1.0);
-        recipeRequest.setRecipeLineItemsDtoList(Arrays.asList(recipeLineItemDto));
+        recipeRequest.setName("Test Recipe");
+        recipeRequest.setRecipeNumber("1");
+        RecipeLineItemDto recipeLineItemRequest1 = new RecipeLineItemDto();
+        recipeLineItemRequest1.setName("Test Ingredient 1");
+        recipeLineItemRequest1.setQuantity(2.0);
+        recipeLineItemRequest1.setUnit("kg");
+        recipeRequest.setRecipeLineItemsDtoList(Arrays.asList(recipeLineItemRequest1));
 
-        RatingResponse ratingResponse = new RatingResponse();
-        // populate recipeResponse with test data
-        ratingResponse.setName("Test Rating");
-        ratingResponse.setRating(3.5);
-
-        IngredientResponse ingredientResponse = new IngredientResponse();
-        // populate productResponse with test data
-        ingredientResponse.setName("Test Ingredient");
-        ingredientResponse.setDescription("Test Description");
-        ingredientResponse.setPrice(BigDecimal.valueOf(5));
-        ingredientResponse.setAmount(1.0);
-        ingredientResponse.setMeasurementUnit("liter");
-
-        Recipe recipe = new Recipe();
-        recipe.setRecipeNumber(recipeNumber);
-        RecipeLineItem recipeLineItem = new RecipeLineItem();
-        recipeLineItem.setId(1L);
-        recipeLineItem.setName("Test Name");
-        recipeLineItem.setUnit("liter");
-        recipeLineItem.setQuantity(1.0);
-        recipe.setRecipeLineItemsList(Arrays.asList(recipeLineItem));
-
-        when(recipeRepository.save(any(Recipe.class))).thenReturn(recipe);
-
-        when(webClient.get()).thenReturn(requestHeadersUriSpec);
-        when(requestHeadersUriSpec.uri(anyString(),  any(Function.class))).thenReturn(requestHeadersSpec);
-        when(requestHeadersSpec.retrieve()).thenReturn(responseSpec);
-        when(responseSpec.bodyToMono(RatingResponse[].class)).thenReturn(Mono.just(new RatingResponse[]{ratingResponse}));
-        when(responseSpec.bodyToMono(IngredientResponse[].class)).thenReturn(Mono.just(new IngredientResponse[]{ingredientResponse}));
 
         // Act
-        boolean result = recipeService.createRecipe(recipeRequest);
+        recipeService.createRecipe(recipeRequest);
 
         // Assert
-        assertTrue(result);
-
         verify(recipeRepository, times(1)).save(any(Recipe.class));
     }
 

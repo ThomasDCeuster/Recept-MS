@@ -23,6 +23,7 @@ public class RecipeController {
         return (result ? "Recipe created successfully" : "Recipe creation failed");
     }
 
+    @CrossOrigin(origins = "https://659b0868480483cbb0fabc9e--magnificent-caramel-73ce1b.netlify.app/")
     @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
     public List<RecipeResponse> getAllRecipes() {
