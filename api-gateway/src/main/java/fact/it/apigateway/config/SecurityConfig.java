@@ -18,7 +18,7 @@ public class SecurityConfig {
         serverHttpSecurity
                 .authorizeExchange(exchange ->
                         exchange
-                                .pathMatchers(HttpMethod.GET, "/api/recipes", "/api/ingredients", "/api/users", "/api/ratings").permitAll()
+                                .pathMatchers("/**").permitAll() // Allow all paths without authentication (for testing)
                                 .anyExchange().authenticated()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2
