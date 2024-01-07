@@ -140,7 +140,6 @@ public class RecipeService {
 
         recipeRepository.deleteById(id);
     }
-    
 
     public boolean updateRecipe(Long id, RecipeRequest updatedRecipe) {
         System.out.println("updating recipe");
