@@ -23,6 +23,7 @@ public class RecipeController {
         return (result ? "Recipe created successfully" : "Recipe creation failed");
     }
 
+    @CrossOrigin(origins = "https://codepen.io/ImNoWan/full/jOJqGBJ")
     @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
     public List<RecipeResponse> getAllRecipes() {

@@ -28,7 +28,7 @@ public class IngredientController {
     public List<IngredientResponse> getIngredientById(@RequestParam String id) {
         return ingredientService.getIngredientById(id);
     }
-
+    @CrossOrigin(origins = "https://codepen.io/ImNoWan/full/jOJqGBJ")
     @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
     public List<IngredientResponse> getAllIngredients() {
