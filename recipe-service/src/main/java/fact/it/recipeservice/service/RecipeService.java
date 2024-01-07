@@ -77,47 +77,12 @@ public class RecipeService {
     public boolean createRecipe(RecipeRequest recipeRequest) {
         Recipe recipe = new Recipe();
         recipe.setRecipeNumber(UUID.randomUUID().toString());
-
-        List<RecipeLineItem> recipeLineItems = Optional.ofNullable(recipeRequest.getRecipeLineItemsDtoList())
-                .orElse(Collections.emptyList())
+        recipe.setName(recipeRequest.getName());
+        recipe.setRecipeLineItemsList(recipeRequest.getRecipeLineItemsDtoList()
                 .stream()
                 .map(this::mapToRecipeLineItem)
-                .toList();
-
-        recipe.setRecipeLineItemsList(recipeLineItems);
-
-        List<String> names = recipe.getRecipeLineItemsList().stream()
-                .map(RecipeLineItem::getName)
-                .toList();
-
-        RatingResponse[] ratingResponseArray = webClient.get()
-                .uri("http://" + ratingServiceBaseUrl + "/api/rating",
-                        uriBuilder -> uriBuilder.queryParam("name", names).build())
-                .retrieve()
-                .bodyToMono(RatingResponse[].class)
-                .block();
-
-
-        IngredientResponse[] ingredientResponseArray = webClient.get()
-                .uri("http://" + ingredientServiceBaseUrl + "/api/ingredient",
-                        uriBuilder -> uriBuilder.queryParam("name", names).build())
-                .retrieve()
-                .bodyToMono(IngredientResponse[].class)
-                .block();
-
-        recipe.getRecipeLineItemsList().stream()
-                .map(recipeItem -> {
-                    IngredientResponse ingredient = Arrays.stream(ingredientResponseArray)
-                            .filter(i -> i.getName().equals(recipeItem.getName()))
-                            .findFirst()
-                            .orElse(null);
-                    if (ingredient != null) {
-                        recipeItem.setQuantity(ingredient.getAmount());
-                        recipeItem.setUnit(ingredient.getMeasurementUnit());
-                    }
-                    return recipeItem;
-                })
-                .collect(Collectors.toList());
+                .toList());
+        
 
         recipeRepository.save(recipe);
         return true;
