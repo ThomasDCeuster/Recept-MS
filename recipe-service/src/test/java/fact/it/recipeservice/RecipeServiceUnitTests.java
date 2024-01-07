@@ -115,12 +115,12 @@ public class RecipeServiceUnitTests {
         RecipeLineItem recipeLineItem1 = new RecipeLineItem(1L, "Item 1", "kg", 2.0);
         RecipeLineItem recipeLineItem2 = new RecipeLineItem(2L, "Item 2", "ml", 500.0);
 
-        Recipe recipe1 = new Recipe("1", "1", "order1", Arrays.asList(recipeLineItem1, recipeLineItem2));
+        Recipe recipe1 = new Recipe(1L, "1", "order1", Arrays.asList(recipeLineItem1, recipeLineItem2));
 
         RecipeLineItem recipeLineItem3 = new RecipeLineItem(1L, "Item 3", "g", 400.0);
         RecipeLineItem recipeLineItem4 = new RecipeLineItem(1L, "Item 4", "l", 2.0);
 
-        Recipe recipe2 = new Recipe("2", "2", "order2", Arrays.asList(recipeLineItem3, recipeLineItem4));
+        Recipe recipe2 = new Recipe(2L, "2", "order2", Arrays.asList(recipeLineItem3, recipeLineItem4));
 
         when(recipeRepository.findAll()).thenReturn(Arrays.asList(recipe1, recipe2));
 
@@ -137,7 +137,7 @@ public class RecipeServiceUnitTests {
     public void testGetRecipesByName() {
         // Arrange
         Recipe recipe = new Recipe();
-        recipe.setId("1");
+        recipe.setId(1L);
         recipe.setName("Test Recipe");
         recipe.setRecipeNumber("1");
         RecipeLineItem recipeLineItem1 = new RecipeLineItem(1L, "Item 1", "kg", 2.0);

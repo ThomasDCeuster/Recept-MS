@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Collection;
 import java.util.List;
 
-public interface RecipeRepository extends JpaRepository<Recipe, String> {
+public interface RecipeRepository extends JpaRepository<Recipe, Long> {
     List<Recipe> findByNameIn(Collection<String> name);
 }
