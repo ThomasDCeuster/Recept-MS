@@ -82,7 +82,6 @@ public class RecipeService {
                 .stream()
                 .map(this::mapToRecipeLineItem)
                 .toList());
-        
 
         recipeRepository.save(recipe);
         return true;
