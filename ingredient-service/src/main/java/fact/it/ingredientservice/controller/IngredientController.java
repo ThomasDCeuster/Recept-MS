@@ -35,9 +35,9 @@ public class IngredientController {
         return ingredientService.getAllIngredients();
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public String deleteIngredient(@RequestParam String id) {
+    public String deleteIngredient(@PathVariable String id) {
         try {
             ingredientService.deleteIngredient(id);
             return "Ingredient deleted successfully";
