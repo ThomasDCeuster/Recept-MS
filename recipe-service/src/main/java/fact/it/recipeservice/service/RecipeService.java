@@ -136,8 +136,7 @@ public class RecipeService {
     }
 
     public List<RecipeResponse> getRecipeByName(String name) {
-        List<Recipe> recipes = recipeRepository.findByNameIn(List.of(name));
-
+        List<Recipe> recipes = recipeRepository.findByName(name);
         return recipes.stream().map(this::mapToRecipeResponse).toList();
     }
 

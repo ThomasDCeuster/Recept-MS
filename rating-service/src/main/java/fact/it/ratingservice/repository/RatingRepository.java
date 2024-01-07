@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Collection;
 import java.util.List;
 
-public interface RatingRepository extends JpaRepository<Rating, String> {
-    List<Rating> findByNameIn(Collection<String> names);
+public interface RatingRepository extends JpaRepository<Rating, Long> {
+    List<Rating> findByName(String names);
 }

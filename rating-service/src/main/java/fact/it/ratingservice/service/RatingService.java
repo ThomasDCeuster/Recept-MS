@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -33,7 +34,7 @@ public class RatingService {
     }
 
     public List<RatingResponse> getRatingByName(String name) {
-        List<Rating> ratings = ratingRepository.findByNameIn(List.of(name));
+        List<Rating> ratings = ratingRepository.findByName(name);
 
         return ratings.stream().map(this::mapToRatingResponse).toList();
     }

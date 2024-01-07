@@ -143,7 +143,7 @@ public class RecipeServiceUnitTests {
         RecipeLineItem recipeLineItem1 = new RecipeLineItem(1L, "Item 1", "kg", 2.0);
         recipe.setRecipeLineItemsList(Arrays.asList(recipeLineItem1));
 
-        when(recipeRepository.findByNameIn(List.of("Test Recipe"))).thenReturn(Arrays.asList(recipe));
+        when(recipeRepository.findByName("Test Recipe")).thenReturn(Arrays.asList(recipe));
 
         // Act
         List<RecipeResponse> recipes = recipeService.getRecipeByName("Test Recipe");
@@ -153,6 +153,6 @@ public class RecipeServiceUnitTests {
         assertEquals("Test Recipe", recipes.get(0).getName());
         assertEquals("1", recipes.get(0).getRecipeNumber());
 
-        verify(recipeRepository, times(1)).findByNameIn(List.of(recipe.getName()));
+        verify(recipeRepository, times(1)).findByName(recipe.getName());
     }
 }
