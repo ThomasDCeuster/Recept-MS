@@ -22,6 +22,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -107,28 +108,28 @@ public class RecipeServiceUnitTests {
 
         verify(recipeRepository, times(1)).save(any(Recipe.class));
     }
-//
-//    @Test
-//    public void testGetAllOrders() {
-//        // Arrange
-//        OrderLineItem orderLineItem1 = new OrderLineItem(1L, "sku1", new BigDecimal("10.00"), 2);
-//        OrderLineItem orderLineItem2 = new OrderLineItem(2L, "sku2", new BigDecimal("20.00"), 3);
-//
-//        Order order1 = new Order(1L, "order1", Arrays.asList(orderLineItem1, orderLineItem2));
-//
-//        OrderLineItem orderLineItem3 = new OrderLineItem(3L, "sku3", new BigDecimal("30.00"), 4);
-//        OrderLineItem orderLineItem4 = new OrderLineItem(4L, "sku4", new BigDecimal("40.00"), 5);
-//
-//        Order order2 = new Order(2L, "order2", Arrays.asList(orderLineItem3, orderLineItem4));
-//
-//        when(orderRepository.findAll()).thenReturn(Arrays.asList(order1, order2));
-//
-//        // Act
-//        List<OrderResponse> result = orderService.getAllOrders();
-//
-//        // Assert
-//        assertEquals(2, result.size());
-//
-//        verify(orderRepository, times(1)).findAll();
-//    }
+
+    @Test
+    public void testGetAllRecipes() {
+        // Arrange
+        RecipeLineItem recipeLineItem1 = new RecipeLineItem(1L, "Item 1", "kg", 2.0);
+        RecipeLineItem recipeLineItem2 = new RecipeLineItem(2L, "Item 2", "ml", 500.0);
+
+        Recipe recipe1 = new Recipe(1L, "1", "order1", Arrays.asList(recipeLineItem1, recipeLineItem2));
+
+        RecipeLineItem recipeLineItem3 = new RecipeLineItem(1L, "Item 3", "g", 400.0);
+        RecipeLineItem recipeLineItem4 = new RecipeLineItem(1L, "Item 4", "l", 2.0);
+
+        Recipe recipe2 = new Recipe(2L, "2", "order2", Arrays.asList(recipeLineItem3, recipeLineItem4));
+
+        when(recipeRepository.findAll()).thenReturn(Arrays.asList(recipe1, recipe2));
+
+        // Act
+        List<RecipeResponse> result = recipeService.getAllRecipes();
+
+        // Assert
+        assertEquals(2, result.size());
+
+        verify(recipeRepository, times(1)).findAll();
+    }
 }
