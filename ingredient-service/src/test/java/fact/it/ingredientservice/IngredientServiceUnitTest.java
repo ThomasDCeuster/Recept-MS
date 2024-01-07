@@ -35,7 +35,7 @@ public class IngredientServiceUnitTest {
         ingredientRequest.setDescription("Test Description");
         ingredientRequest.setMeasurementUnit("liter");
         ingredientRequest.setPrice(BigDecimal.valueOf(5));
-        ingredientRequest.setAmount(1.0);
+        ingredientRequest.setAmount(1);
 
         // Act
         ingredientService.createIngredient(ingredientRequest);
@@ -53,7 +53,7 @@ public class IngredientServiceUnitTest {
         ingredient.setDescription("Test Description");
         ingredient.setMeasurementUnit("liter");
         ingredient.setPrice(BigDecimal.valueOf(5));
-        ingredient.setAmount(1.0);
+        ingredient.setAmount(1);
 
         when(ingredientRepository.findAll()).thenReturn(Arrays.asList(ingredient));
 
@@ -66,7 +66,7 @@ public class IngredientServiceUnitTest {
         assertEquals("Test Description", ingredients.get(0).getDescription());
         assertEquals("liter", ingredients.get(0).getMeasurementUnit());
         assertEquals(BigDecimal.valueOf(5), ingredients.get(0).getPrice());
-        assertEquals(1.0, ingredients.get(0).getAmount());
+        assertEquals(1, ingredients.get(0).getAmount());
 
         verify(ingredientRepository, times(1)).findAll();
     }
@@ -80,7 +80,7 @@ public class IngredientServiceUnitTest {
         ingredient.setDescription("Test Description");
         ingredient.setMeasurementUnit("liter");
         ingredient.setPrice(BigDecimal.valueOf(5));
-        ingredient.setAmount(1.0);
+        ingredient.setAmount(1);
 
         when(ingredientRepository.findByIdIn("1")).thenReturn(Arrays.asList(ingredient));
 
@@ -93,7 +93,7 @@ public class IngredientServiceUnitTest {
         assertEquals("Test Description", ingredients.get(0).getDescription());
         assertEquals("liter", ingredients.get(0).getMeasurementUnit());
         assertEquals(BigDecimal.valueOf(5), ingredients.get(0).getPrice());
-        assertEquals(1.0, ingredients.get(0).getAmount());
+        assertEquals(1, ingredients.get(0).getAmount());
 
         verify(ingredientRepository, times(1)).findByIdIn(ingredient.getId());
     }
