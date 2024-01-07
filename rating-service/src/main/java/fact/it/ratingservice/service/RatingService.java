@@ -27,7 +27,7 @@ public class RatingService {
             Rating rating2 = new Rating();
             rating2.setName("Chicken Broccoli");
             rating2.setRating(3.5);
-            
+
 
             ratingRepository.save(rating1);
             ratingRepository.save(rating2);

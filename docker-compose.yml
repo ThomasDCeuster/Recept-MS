@@ -94,15 +94,21 @@ services:
    depends_on:
      - ingredient-service
      - recipe-service
+     - user-service
+     - rating-service
    image: r0882755718/ede-api-gateway
    ports:
      - 8084:8084
    links:
      - ingredient-service
      - recipe-service
+     - user-service
+     - rating-service
    environment:
      INGREDIENT_SERVICE_BASEURL: ingredient-service:8080
      RECIPE_SERVICE_BASEURL: recipe-service:8081
+     USER_SERVICE_BASEURL: user-service:8083
+     RATING_SERVICE_BASEURL: rating-service:8082
 
 volumes:
  mysql_rating_data:
