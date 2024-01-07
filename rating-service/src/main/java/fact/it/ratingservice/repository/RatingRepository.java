@@ -3,6 +3,7 @@ package fact.it.ratingservice.repository;
 import fact.it.ratingservice.model.Rating;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+
 import java.util.Collection;
 import java.util.List;
 
