@@ -1,14 +1,31 @@
 package fact.it.recipeservice;
 
+import fact.it.recipeservice.dto.*;
+import fact.it.recipeservice.model.Recipe;
+import fact.it.recipeservice.model.RecipeLineItem;
 import fact.it.recipeservice.repository.RecipeRepository;
 import fact.it.recipeservice.service.RecipeService;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.OneToMany;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
+
+import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Function;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class RecipeServiceUnitTests {
@@ -37,118 +54,59 @@ public class RecipeServiceUnitTests {
         ReflectionTestUtils.setField(recipeService, "ratingServiceBaseUrl", "http://localhost:8082");
     }
 
-//    @Test
-//    public void testPlaceOrder_Success() {
-//        // Arrange
-//
-//        String skuCode = "sku1";
-//        Integer quantity = 2;
-//        BigDecimal price = BigDecimal.valueOf(100);
-//        String description = "Test Description";
-//        String name = "Test Name";
-//
-//        OrderRequest orderRequest = new OrderRequest();
-//        // populate orderRequest with test data
-//        OrderLineItemDto orderLineItemDto = new OrderLineItemDto();
-//        orderLineItemDto.setId(1L);
-//        orderLineItemDto.setSkuCode(skuCode);
-//        orderLineItemDto.setQuantity(quantity);
-//        orderRequest.setOrderLineItemsDtoList(Arrays.asList(orderLineItemDto));
-//
-//        InventoryResponse inventoryResponse = new InventoryResponse();
-//        // populate inventoryResponse with test data
-//        inventoryResponse.setSkuCode(skuCode);
-//        inventoryResponse.setInStock(true);
-//
-////        ProductResponse productResponse = new ProductResponse();
-////        // populate productResponse with test data
-////        productResponse.setId("1");
-////        productResponse.setSkuCode(skuCode);
-////        productResponse.setName(name);
-////        productResponse.setDescription(description);
-////        productResponse.setPrice(price);
-//
-//        Order order = new Order();
-//        order.setId(1L);
-//        order.setOrderNumber("1");
-//        OrderLineItem orderLineItem = new OrderLineItem();
-//        orderLineItem.setId(1L);
-//        orderLineItem.setSkuCode(skuCode);
-//        orderLineItem.setQuantity(quantity);
-//        orderLineItem.setPrice(price);
-//        order.setOrderLineItemsList(Arrays.asList(orderLineItem));
-//
-//        when(orderRepository.save(any(Order.class))).thenReturn(order);
-//
-//        when(webClient.get()).thenReturn(requestHeadersUriSpec);
-//        when(requestHeadersUriSpec.uri(anyString(),  any(Function.class))).thenReturn(requestHeadersSpec);
-//        when(requestHeadersSpec.retrieve()).thenReturn(responseSpec);
-//        when(responseSpec.bodyToMono(InventoryResponse[].class)).thenReturn(Mono.just(new InventoryResponse[]{inventoryResponse}));
-//        when(responseSpec.bodyToMono(ProductResponse[].class)).thenReturn(Mono.just(new ProductResponse[]{productResponse}));
-//
-//        // Act
-//        boolean result = orderService.placeOrder(orderRequest);
-//
-//        // Assert
-//        assertTrue(result);
-//
-//        verify(orderRepository, times(1)).save(any(Order.class));
-//    }
-//
-//    @Test
-//    public void testPlaceOrder_FailureIfOutOfStock() {
-//        // Arrange
-//
-//        String skuCode = "sku1";
-//        Integer quantity = 2;
-//        BigDecimal price = BigDecimal.valueOf(100);
-//        String description = "Test Description";
-//        String name = "Test Name";
-//
-//        OrderRequest orderRequest = new OrderRequest();
-//        // populate orderRequest with test data
-//        OrderLineItemDto orderLineItemDto = new OrderLineItemDto();
-//        orderLineItemDto.setId(1L);
-//        orderLineItemDto.setSkuCode(skuCode);
-//        orderLineItemDto.setQuantity(quantity);
-//        orderRequest.setOrderLineItemsDtoList(Arrays.asList(orderLineItemDto));
-//
-//        InventoryResponse inventoryResponse = new InventoryResponse();
-//        // populate inventoryResponse with test data
-//        inventoryResponse.setSkuCode(skuCode);
-//        inventoryResponse.setInStock(false);
-//
-//        ProductResponse productResponse = new ProductResponse();
-//        // populate productResponse with test data
-//        productResponse.setId("1");
-//        productResponse.setSkuCode(skuCode);
-//        productResponse.setName(name);
-//        productResponse.setDescription(description);
-//        productResponse.setPrice(price);
-//
-//        Order order = new Order();
-//        order.setId(1L);
-//        order.setOrderNumber("1");
-//        OrderLineItem orderLineItem = new OrderLineItem();
-//        orderLineItem.setId(1L);
-//        orderLineItem.setSkuCode(skuCode);
-//        orderLineItem.setQuantity(quantity);
-//        orderLineItem.setPrice(price);
-//        order.setOrderLineItemsList(Arrays.asList(orderLineItem));
-//
-//        when(webClient.get()).thenReturn(requestHeadersUriSpec);
-//        when(requestHeadersUriSpec.uri(anyString(),  any(Function.class))).thenReturn(requestHeadersSpec);
-//        when(requestHeadersSpec.retrieve()).thenReturn(responseSpec);
-//        when(responseSpec.bodyToMono(InventoryResponse[].class)).thenReturn(Mono.just(new InventoryResponse[]{inventoryResponse}));
-//
-//        // Act
-//        boolean result = orderService.placeOrder(orderRequest);
-//
-//        // Assert
-//        assertFalse(false);
-//
-//        verify(orderRepository, times(0)).save(order);
-//    }
+    @Test
+    public void testCreateRecipe_Success() {
+        // Arrange
+        String recipeNumber = "1";
+        String name = "Test Name";
+
+        RecipeRequest recipeRequest = new RecipeRequest();
+        // populate recipeRequest with test data
+        RecipeLineItemDto recipeLineItemDto = new RecipeLineItemDto();
+        recipeLineItemDto.setId(1L);
+        recipeLineItemDto.setUnit("liter");
+        recipeLineItemDto.setName("Test Name");
+        recipeLineItemDto.setQuantity(1.0);
+        recipeRequest.setRecipeLineItemsDtoList(Arrays.asList(recipeLineItemDto));
+
+        RatingResponse ratingResponse = new RatingResponse();
+        // populate recipeResponse with test data
+        ratingResponse.setName("Test Rating");
+        ratingResponse.setRating(3.5);
+
+        IngredientResponse ingredientResponse = new IngredientResponse();
+        // populate productResponse with test data
+        ingredientResponse.setName("Test Ingredient");
+        ingredientResponse.setDescription("Test Description");
+        ingredientResponse.setPrice(BigDecimal.valueOf(5));
+        ingredientResponse.setAmount(1.0);
+        ingredientResponse.setMeasurementUnit("liter");
+
+        Recipe recipe = new Recipe();
+        recipe.setRecipeNumber(recipeNumber);
+        RecipeLineItem recipeLineItem = new RecipeLineItem();
+        recipeLineItem.setId(1L);
+        recipeLineItem.setName("Test Name");
+        recipeLineItem.setUnit("liter");
+        recipeLineItem.setQuantity(1.0);
+        recipe.setRecipeLineItemsList(Arrays.asList(recipeLineItem));
+
+        when(recipeRepository.save(any(Recipe.class))).thenReturn(recipe);
+
+        when(webClient.get()).thenReturn(requestHeadersUriSpec);
+        when(requestHeadersUriSpec.uri(anyString(),  any(Function.class))).thenReturn(requestHeadersSpec);
+        when(requestHeadersSpec.retrieve()).thenReturn(responseSpec);
+        when(responseSpec.bodyToMono(RatingResponse[].class)).thenReturn(Mono.just(new RatingResponse[]{ratingResponse}));
+        when(responseSpec.bodyToMono(IngredientResponse[].class)).thenReturn(Mono.just(new IngredientResponse[]{ingredientResponse}));
+
+        // Act
+        boolean result = recipeService.createRecipe(recipeRequest);
+
+        // Assert
+        assertTrue(result);
+
+        verify(recipeRepository, times(1)).save(any(Recipe.class));
+    }
 //
 //    @Test
 //    public void testGetAllOrders() {
