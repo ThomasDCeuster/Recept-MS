@@ -140,6 +140,8 @@ public class RecipeServiceUnitTests {
         recipe.setId(1L);
         recipe.setName("Test Recipe");
         recipe.setRecipeNumber("1");
+        RecipeLineItem recipeLineItem1 = new RecipeLineItem(1L, "Item 1", "kg", 2.0);
+        recipe.setRecipeLineItemsList(Arrays.asList(recipeLineItem1));
 
         when(recipeRepository.findByNameIn("Test Recipe")).thenReturn(Arrays.asList(recipe));
 
