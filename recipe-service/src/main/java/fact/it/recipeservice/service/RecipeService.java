@@ -142,23 +142,18 @@ public class RecipeService {
     }
 
     public boolean updateRecipe(Long id, RecipeRequest updatedRecipe) {
-        Recipe existingRecipe = recipeRepository.findById(id)
+        System.out.println("updating recipe");
+        System.out.println("request: " + updatedRecipe);
+        Recipe recipe = recipeRepository.findById(id)
                 .orElseThrow(() -> new RecipeNotFoundException("Recipe not found with id: " + id));
 
-        // Update existing recipe with new data
-        existingRecipe.setName(updatedRecipe.getName());
-        existingRecipe.setRecipeNumber(updatedRecipe.getRecipeNumber());
-
-        // Update recipe line items if needed (example: assuming they are a list of RecipeLineItemDto)
-        List<RecipeLineItem> updatedRecipeLineItems = updatedRecipe.getRecipeLineItemsDtoList()
+        recipe.setName(updatedRecipe.getName());
+        recipe.setRecipeLineItemsList(updatedRecipe.getRecipeLineItemsDtoList()
                 .stream()
                 .map(this::mapToRecipeLineItem)
-                .toList();
-        existingRecipe.setRecipeLineItemsList(updatedRecipeLineItems);
+                .toList());
 
-        // Save the updated recipe
-        recipeRepository.save(existingRecipe);
-
+        recipeRepository.save(recipe);
         return true;
     }
 }
