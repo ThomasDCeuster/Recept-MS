@@ -9,6 +9,7 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
+/*
 @Configuration
 @EnableWebFluxSecurity
 public class SecurityConfig {
@@ -26,3 +27,4 @@ public class SecurityConfig {
         return serverHttpSecurity.build();
     }
 }
+*/
