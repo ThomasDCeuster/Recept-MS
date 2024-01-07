@@ -11,9 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -76,10 +74,11 @@ public class RecipeService {
     }
 
     public boolean createRecipe(RecipeRequest recipeRequest) {
-        /*Recipe recipe = new Recipe();
+        Recipe recipe = new Recipe();
         recipe.setRecipeNumber(UUID.randomUUID().toString());
 
-        List<RecipeLineItem> recipeLineItems = recipeRequest.getRecipeLineItemsDtoList()
+        List<RecipeLineItem> recipeLineItems = Optional.ofNullable(recipeRequest.getRecipeLineItemsDtoList())
+                .orElse(Collections.emptyList())
                 .stream()
                 .map(this::mapToRecipeLineItem)
                 .toList();
@@ -119,18 +118,6 @@ public class RecipeService {
                 })
                 .collect(Collectors.toList());
 
-        recipeRepository.save(recipe);
-        return true;*/
-
-
-        Recipe recipe = new Recipe();
-        recipe.setRecipeNumber(UUID.randomUUID().toString());
-        List<RecipeLineItem> recipeLineItems = recipeRequest.getRecipeLineItemsDtoList()
-                .stream()
-                .map(this::mapToRecipeLineItem)
-                .collect(Collectors.toList());
-
-        recipe.setRecipeLineItemsList(recipeLineItems);
         recipeRepository.save(recipe);
         return true;
     }
