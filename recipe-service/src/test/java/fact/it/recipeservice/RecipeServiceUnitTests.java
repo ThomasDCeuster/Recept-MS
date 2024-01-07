@@ -132,4 +132,25 @@ public class RecipeServiceUnitTests {
 
         verify(recipeRepository, times(1)).findAll();
     }
+
+    @Test
+    public void testGetRecipesByName() {
+        // Arrange
+        Recipe recipe = new Recipe();
+        recipe.setId(1L);
+        recipe.setName("Test Recipe");
+        recipe.setRecipeNumber("1");
+
+        when(recipeRepository.findByNameIn("Test Recipe")).thenReturn(Arrays.asList(recipe));
+
+        // Act
+        List<RecipeResponse> recipes = recipeService.getRecipeByName("Test Recipe");
+
+        // Assert
+        assertEquals(1, recipes.size());
+        assertEquals("Test Recipe", recipes.get(0).getName());
+        assertEquals("1", recipes.get(0).getRecipeNumber());
+
+        verify(recipeRepository, times(1)).findByNameIn(recipe.getName());
+    }
 }
