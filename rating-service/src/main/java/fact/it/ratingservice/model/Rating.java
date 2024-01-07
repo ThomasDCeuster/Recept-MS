@@ -8,7 +8,7 @@ import lombok.Setter;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "rating")
+@Table(name = "ratings")
 @Getter
 @Setter
 @AllArgsConstructor
