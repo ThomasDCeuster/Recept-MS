@@ -7,7 +7,7 @@ logging:
     org.springframework.cloud.gateway: INFO
     org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator: INFO
     reactor.netty: INFO
-    org.springframework.security: TRACE
+    org.springframework.security: DEBUG
 
 spring:
   security:
@@ -29,35 +29,70 @@ spring:
           uri: http://${INGREDIENT_SERVICE_BASEURL:localhost:8080}
           predicates:
             - Path=/ingredients
-            - Method=POST
-          filters:
-            - SetPath=/api/ingredient
-
-        - id: ingredient-service-all
-          uri: http://${INGREDIENT_SERVICE_BASEURL:localhost:8080}
-          predicates:
-            - Path=/ingredients
             - Method=GET
           filters:
-            - SetPath=/api/ingredient/all
-
-        - id: recipe-service
-          uri: http://${RECIPE_SERVICE_BASEURL:localhost:8081}
-          predicates:
-            - Path=/recipes
-          filters:
-            - SetPath=/api/recipe
+            - SetPath=/api/ingredient
 
         - id: user-service
           uri: http://${USER_SERVICE_BASEURL:localhost:8083}
           predicates:
             - Path=/users
+            - Method=GET
           filters:
             - SetPath=/api/user
+
+        - id: user-service
+          uri: http://${USER_SERVICE_BASEURL:localhost:8083}
+          predicates:
+            - Path=/users
+            - Method=GET
+          filters:
+            - SetPath=/api/user/all
 
         - id: rating-service
           uri: http://${RATING_SERVICE_BASEURL:localhost:8082}
           predicates:
             - Path=/ratings
+            - Method=GET
           filters:
             - SetPath=/api/rating
+
+        - id: recipe-service
+          uri: http://${RECIPE_SERVICE_BASEURL:localhost:8081}
+          predicates:
+            - Path=/recipes
+            - Method=GET
+          filters:
+            - SetPath=/api/recipe
+
+        - id: recipe-service-all
+          uri: http://${RECIPE_SERVICE_BASEURL:localhost:8081}
+          predicates:
+            - Path=/recipes
+            - Method=GET
+          filters:
+            - SetPath=/api/recipe/all
+
+        - id: recipe-service-create
+          uri: http://${RECIPE_SERVICE_BASEURL:localhost:8081}
+          predicates:
+            - Path=/recipes
+            - Method=POST
+          filters:
+            - SetPath=/api/recipe/create
+
+        - id: recipe-service-edit
+          uri: http://${RECIPE_SERVICE_BASEURL:localhost:8081}
+          predicates:
+            - Path=/recipes
+            - Method=PUT
+          filters:
+            - SetPath=/api/recipe/edit
+
+        - id: recipe-service-delete
+          uri: http://${RECIPE_SERVICE_BASEURL:localhost:8081}
+          predicates:
+            - Path=/recipes
+            - Method=DELETE
+          filters:
+            - SetPath=/api/recipe/delete
