@@ -28,4 +28,22 @@ public class RecipeController {
     public List<RecipeResponse> getAllIngredients() {
         return recipeService.getAllRecipes();
     }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public String updateRecipe(@PathVariable Long id, @RequestBody RecipeRequest updatedRecipe) {
+        boolean result = recipeService.updateRecipe(id, updatedRecipe);
+        return (result ? "Recipe updated successfully" : "Recipe update failed");
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public String deleteRecipe(@PathVariable Long id) {
+        try {
+            recipeService.deleteRecipe(id);
+            return "Recipe deleted successfully";
+        } catch (Exception e) {
+            return "Recipe deletion failed: " + e.getMessage();
+        }
+    }
 }
